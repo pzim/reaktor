@@ -1,0 +1,42 @@
+{
+  "ref": "refs\/heads\/dev_hook_test",
+  "after": "0000000000000000000000000000000000000000",
+  "before": "88adbbc742fac0152915555bb062a04ddf63cef7",
+  "created": false,
+  "deleted": true,
+  "forced": true,
+  "compare": "https:\/\/github.webapps.rr.com\/fylgia\/webhook_test_two\/compare\/88adbbc742fa...000000000000",
+  "commits": [
+    
+  ],
+  "head_commit": null,
+  "repository": {
+    "id": 1025,
+    "name": "webhook_test_two",
+    "url": "https:\/\/github.webapps.rr.com\/fylgia\/webhook_test_two",
+    "description": "",
+    "watchers": 0,
+    "stargazers": 0,
+    "forks": 0,
+    "fork": false,
+    "size": 44,
+    "owner": {
+      "name": "fylgia",
+      "email": null
+    },
+    "private": false,
+    "open_issues": 0,
+    "has_issues": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "language": "Ruby",
+    "created_at": 1397246026,
+    "pushed_at": 1400943117,
+    "master_branch": "master",
+    "organization": "fylgia"
+  },
+  "pusher": {
+    "name": "pzimmer",
+    "email": "phil.zimmerman@twcable.com"
+  }
+}

@@ -1,0 +1,8 @@
+foo: "bar"
+git_src: "GitHub"
+nested:
+  a: 1
+  b: 2
+string_hash:
+  a: "this"
+  b: "that"

@@ -1,0 +1,11 @@
+mod 'testmod1',
+  :git => 'git@testing.com:reaktor/testmod1.git',
+  :ref => 'RELEASE_1.0.0'
+
+mod 'testmod2',
+  :git => 'git@testing.com:reaktor/testmod2.git',
+  :ref => 'RELEASE_2.0.10'
+
+mod 'testmod3',
+  :git => 'git@testing.com:reaktor/testmod3.git',
+  :ref => 'RELEASE_10.2.3'
