@@ -1,4 +1,3 @@
-#role :puppet_master, "puppet-master-01.cdp.webapps.rr.com", "puppet-master-01.lab.webapps.rr.com"
 
 def getPuppetMasters
   m_file = ENV['REAKTOR_PUPPET_MASTERS_FILE']
