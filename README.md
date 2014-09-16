@@ -23,9 +23,35 @@ git clone git://github.com/pzim/reaktor
 cd reaktor  
 bundle install
 
+### User Requirements
+
+The user you install and run reaktor as needs to have ssh trusts set up to the puppet masters.  
+  
+That same user must also have git commit privileges to your Github or Github Enterprise puppet module and puppetfile repositories. 
+
 ### Starting the post-receive hook
 cd reaktor  
-rake start (starts the post-receive hook and the resque workers)
+rake start (starts the post-receive hook and the resque workers)  
+
+```
+[jenkins@puppet-ci-01 reaktor]$ rake start
+Starting server on puppet-ci-01.lab.webapps.rr.com:4570 ...
+*** DEPRECATION WARNING: Resque::Worker#verbose and #very_verbose are deprecated. Please set Resque.logger.level instead
+Called from: /usr/local/rvm/gems/ruby-1.9.3-p448@reaktor/gems/resque-1.25.2/lib/resque/worker.rb:746:in `verbose='
+	/usr/local/rvm/gems/ruby-1.9.3-p448@reaktor/gems/resque-1.25.2/lib/resque/tasks.rb:16:in `block (2 levels) in <top (required)>'
+	/usr/local/rvm/gems/ruby-1.9.3-p448@reaktor/gems/rake-10.3.2/lib/rake/task.rb:240:in `call'
+	/usr/local/rvm/gems/ruby-1.9.3-p448@reaktor/gems/rake-10.3.2/lib/rake/task.rb:240:in `block in execute'
+	/usr/local/rvm/gems/ruby-1.9.3-p448@reaktor/gems/rake-10.3.2/lib/rake/task.rb:235:in `each'
+	/usr/local/rvm/gems/ruby-1.9.3-p448@reaktor/gems/rake-10.3.2/lib/rake/task.rb:235:in `execute'
+*** DEPRECATION WARNING: Resque::Worker#verbose and #very_verbose are deprecated. Please set Resque.logger.level instead
+Called from: /usr/local/rvm/gems/ruby-1.9.3-p448@reaktor/gems/resque-1.25.2/lib/resque/worker.rb:746:in `verbose='
+	/usr/local/rvm/gems/ruby-1.9.3-p448@reaktor/gems/resque-1.25.2/lib/resque/tasks.rb:16:in `block (2 levels) in <top (required)>'
+	/usr/local/rvm/gems/ruby-1.9.3-p448@reaktor/gems/rake-10.3.2/lib/rake/task.rb:240:in `call'
+	/usr/local/rvm/gems/ruby-1.9.3-p448@reaktor/gems/rake-10.3.2/lib/rake/task.rb:240:in `block in execute'
+	/usr/local/rvm/gems/ruby-1.9.3-p448@reaktor/gems/rake-10.3.2/lib/rake/task.rb:235:in `each'
+	/usr/local/rvm/gems/ruby-1.9.3-p448@reaktor/gems/rake-10.3.2/lib/rake/task.rb:235:in `execute'
+*** DEPRECATION WARNING: Resque::Worker#verbose and #very_verbose are deprecated. Please set Resque.logger.level instead
+```
 
 ### Environment Variables
 
