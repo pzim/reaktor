@@ -57,6 +57,25 @@ name of hipchat room to send reaktor/r10k output notifications
 
 user to send hipchat notifications as  
 
+## Host and Port Configuration
+Host and Port configuration is handled in the [reaktor/reaktor-cfg.yml](https://github.com/pzim/reaktor/blob/master/reaktor-cfg.yml) file: 
+ 
+- The 'address' key is where you configure the hostname  
+- The 'port' key is where you configure what port to listen on
+
+These are the most important bits to configure, as they help make up the url for the webhook setting in your git repo config. For example: 
+ 
+- address: myserver-01.puppet.com
+- port: 4500
+
+The resultant url (assuming you are using GitHub or GitHub Enterprise):  
+
+- http://myserver-01.puppet.com:4500/github_payload
+
+This is the url you would configure in the GitHub ServiceHooks Webhook URL for each internal puppet module.  
+
+The reaktor/reaktor-cfg.yml has additional items that you can configure, including pidfile and log. 
+
 
 ## Pluggable Notifications  
 The default IM tool for receiving reaktor notifications is [hipchat](http://hipchat.com). By setting the appropriate HIPCHAT-related environment variables above, you will receive hipchat notifications automatically.  

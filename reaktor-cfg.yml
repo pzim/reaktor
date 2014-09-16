@@ -1,5 +1,5 @@
 ---
-address: puppet-ci-01.lab.webapps.rr.com
+address: localhost
 port: 4570
 servers: 1
 max_conns: 1024
