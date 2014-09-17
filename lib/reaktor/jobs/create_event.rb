@@ -1,4 +1,4 @@
-require 'github/create_action'
+require 'gitaction/create_action'
 require 'logger'
 
 module Reaktor
@@ -16,7 +16,7 @@ module Reaktor
                    }
         Redis::Lock.new(branch_name, :expiration => 300).lock do
           # do your stuff here ...
-          action = Reaktor::Github::CreateAction.new(@options)
+          action = Reaktor::GitAction::CreateAction.new(@options)
           action.setup
           action.updatePuppetFile
           action.cleanup

@@ -3,7 +3,7 @@ require 'json'
 require 'sinatra/base'
 require 'sinatra/config_file'
 
-require 'github'
+require 'gitaction'
 require 'event_jobs'
 require 'r10k'
 

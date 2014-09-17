@@ -1,6 +1,6 @@
 require 'resque'
 require 'event_jobs'
-require 'github'
+require 'gitaction'
 require 'logger'
 #needed temporarily to test
 require 'notification/notifier'

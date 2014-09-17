@@ -1,6 +1,6 @@
 module Reaktor
-module Github
-  class CreateAction < Action
+module GitAction
+  class ModifyAction < Action
     def initialize(options = {})
       super(options)
       @puppetfile = R10K::Puppetfile.new(self.branch_name, self.module_name, self.logger)
@@ -12,17 +12,13 @@ module Github
       @puppetfile_dir.clone
       @puppetfile_dir.checkout(self.branch_name)
     end
-    def updatePuppetFile
+    def updatePuppetfile
       pfile_contents = @puppetfile.update_module_ref(self.module_name, self.branch_name)
       @puppetfile.write_new_puppetfile(pfile_contents)
-      pushed = @puppetfile_dir.push(self.branch_name, @puppetfile.git_update_ref_msg)
-      if pushed
-        Notification::Notifier.instance.notification = "r10k deploy environment for #{branch_name} in progress..."
-        result = r10k_deploy_env self.branch_name
-        if result.exited?
-          Notification::Notifier.instance.notification = "r10k deploy environment for #{branch_name} finished"
-        end
-      end
+      @puppetfile_dir.push(self.branch_name, @puppetfile.git_update_ref_msg)
+      Notification::Notifier.instance.notification = "r10k deploy module for #{module_name} in progress..."
+      r10k_deploy_module self.module_name
+      Notification::Notifier.instance.notification = "r10k deploy module for #{module_name} finished"
     end
     def cleanup
       @puppetfile_dir.destroy_workdir
@@ -30,3 +26,6 @@ module Github
   end
 end
 end
+   
+
+

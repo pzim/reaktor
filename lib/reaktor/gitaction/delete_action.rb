@@ -1,5 +1,5 @@
 module Reaktor
-module Github
+module GitAction
   class DeleteAction < Action
     def initialize(options = {})
       super(options)

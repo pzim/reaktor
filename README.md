@@ -16,6 +16,7 @@ Reaktor utilizes [resque](https://github.com/resque/resque) to provide event pro
 
 	- Ruby (tested and verified with 1.9.3)
 	- Git
+	- Redis (needed for resque to work properly)
 	
 ### Installation
 
@@ -30,6 +31,7 @@ The user you install and run reaktor as needs to have ssh trusts set up to the p
 That same user must also have git commit privileges to your Github or Github Enterprise puppet module and puppetfile repositories. 
 
 ### Starting the post-receive hook
+** ensure redis is installed and running **  
 cd reaktor  
 rake start (starts the post-receive hook and the resque workers)  
 

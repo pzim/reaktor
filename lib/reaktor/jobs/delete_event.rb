@@ -13,7 +13,7 @@ module Reaktor
         }
         Redis::Lock.new(branch_name, :expiration => 30).lock do
           # do your stuff here ...
-          action = Reaktor::Github::DeleteAction.new(@options)
+          action = Reaktor::GitAction::DeleteAction.new(@options)
           action.setup
           action.deletePuppetfileBranch
           action.cleanup

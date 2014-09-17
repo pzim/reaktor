@@ -1,9 +1,7 @@
 require 'event_jobs'
-require 'github'
+require 'gitaction'
 require 'logger'
 require 'event_jobs'
-#needed temporarily to test
-#require 'notification/notifier'
 
 module Reaktor
   module Jobs

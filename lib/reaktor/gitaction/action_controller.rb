@@ -1,7 +1,7 @@
 require 'logger'
 
 module Reaktor
-module Github
+module GitAction
   class ActionController
 
     attr_reader :created, :deleted, :json
@@ -13,7 +13,7 @@ module Github
 
     ##
     # action_type returns an instance of an action class.
-    # If no action is registered for the Github action then `nil` is returned.
+    # If no action is registered for the GitAction action then `nil` is returned.
     #
     # @return [Reaktor::Action] subclass instance suitable to perform necessary actions
     # , or `nil`.
@@ -33,7 +33,7 @@ module Github
                     :branch_name => branch_name,
 		                :logger => logger
                   }
-        action = Reaktor::Github::CreateAction.new(options)  
+        action = Reaktor::GitAction::CreateAction.new(options)  
         return action
       end
 
@@ -42,7 +42,7 @@ module Github
         options = { :branch_name => branch_name,
 		    :logger => logger
                   }
-        action = Reaktor::Github::DeleteAction.new(options)  
+        action = Reaktor::GitAction::DeleteAction.new(options)  
         return action
       end
 
@@ -52,7 +52,7 @@ module Github
                     :branch_name => branch_name,
 		                :logger => logger
                   }
-        action = Reaktor::Github::ModifyAction.new(options)  
+        action = Reaktor::GitAction::ModifyAction.new(options)  
         return action
       end
 

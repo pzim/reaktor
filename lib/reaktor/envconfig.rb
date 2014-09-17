@@ -51,9 +51,9 @@ module Reaktor
       case rack_env
 
         when 'development', 'test', 'production'
-          system("VERBOSE=1 TERM_CHILD=1 QUEUE=resque_create rake resque:work >> #{reaktor_log} &")
-          system("VERBOSE=1 TERM_CHILD=1 QUEUE=resque_modify rake resque:work >> #{reaktor_log} &")
-          system("VERBOSE=1 TERM_CHILD=1 QUEUE=resque_delete rake resque:work >> #{reaktor_log} &")
+          system("TERM_CHILD=1 QUEUE=resque_create rake resque:work >> #{reaktor_log} &")
+          system("TERM_CHILD=1 QUEUE=resque_modify rake resque:work >> #{reaktor_log} &")
+          system("TERM_CHILD=1 QUEUE=resque_delete rake resque:work >> #{reaktor_log} &")
          
         else
           raise ArgumentError, "Cannot init resque workers: unknown RACK_ENV #{rack_env}"

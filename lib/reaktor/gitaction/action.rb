@@ -4,7 +4,7 @@ require 'git'
 require 'notification/notifier'
 
 module Reaktor
-module Github
+module GitAction
   class Action
     include R10K::Deploy
     attr_accessor :module_name,
