@@ -11,8 +11,6 @@ require 'logger'
 
 module Reaktor
   class R10KApp < Sinatra::Base
-    #register Sinatra::ConfigFile
-    #config_file '../config/r10k_config.yml'
 
     rack_root   = ENV['RACK_ROOT'] || "/data/apps/sinatra/reaktor"
     reaktor_log = ENV['REAKTOR_LOG'] || "#{rack_root}/reaktor.log"
