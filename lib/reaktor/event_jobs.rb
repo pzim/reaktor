@@ -6,5 +6,6 @@ module Reaktor
     require 'jobs/modify_event'
     require 'jobs/controller'
     require 'jobs/github_controller'
+    require 'jobs/gitlab_controller'
   end
 end
