@@ -6,6 +6,6 @@ module Reaktor
     require 'gitaction/modify_action'
     require 'gitaction/action_controller'
     require 'utils/github_payload'
+    require 'utils/gitlab_payload'
   end
 end
-
