@@ -25,9 +25,8 @@ module Reaktor
     end
 
     post '/gitlab_payload' do
-      jsonPayload = json
-      logger.info("gitlab payload = #{jsonPayload}")
-      gitlab_controller = Reaktor::Jobs::GitLabController.new(jsonPayload, @logger)
+      logger.info("gitlab payload = #{json}")
+      gitlab_controller = Reaktor::Jobs::GitLabController.new(json, @logger)
       gitlab_controller.process_event
     end
 

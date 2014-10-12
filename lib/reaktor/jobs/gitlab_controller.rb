@@ -1,16 +1,13 @@
 require 'event_jobs'
 require 'gitaction'
 require 'logger'
-require 'event_jobs'
 
 module Reaktor
   module Jobs
     class GitLabController < Controller
 
-      ##
       # process the event - enqueue and let the relevant action class
       # do the processing
-      #
       def process_event
         logger = @logger
         @git_payload = Reaktor::Utils::GitLabPayload.new(@json)
@@ -19,9 +16,6 @@ module Reaktor
         branch_name = @git_payload.branch_name
         @created = @git_payload.created
         @deleted = @git_payload.deleted
-
-        #temp for testing
-        #Notification::Notifier.instance.notification = "branch_name = #{branch_name}"
 
         if @created && isBranch(ref_type)
           logger.info("Create Event")
