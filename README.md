@@ -54,9 +54,9 @@ puppet-master-01
 puppet-master-02  
 ...  
 
-##### REAKTOR_PUPPETFILE_GIT_URL (required)
+##### PUPPETFILE_GIT_URL (required)
 
-export REAKTOR_PUPPETFILE_GIT_URL="git@github.com:_org_/puppetfile.git"
+export PUPPETFILE_GIT_URL="git@github.com:_org_/puppetfile.git"
 
 ##### REAKTOR_HIPCHAT_TOKEN (required if using hipchat)
 
