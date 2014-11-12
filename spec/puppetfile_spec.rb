@@ -1,10 +1,13 @@
 require 'spec_helper'
 require 'r10k/puppetfile'
+require 'fileutils'
 
 describe Reaktor::R10K::Puppetfile do
   let(:logger)  { double('logger').as_null_object }
   let(:branch) { ('reaktor_test1') }
+  let(:branch2) { ('reaktor_test2') }
   let(:mod) { ('testmod1') }
+  let(:mod2) { ('testmod2') }
   let(:now) { Time.now.strftime('%Y%m%d%H%M%S%L') }
   #let(:puppetfile_orig) { File.new(read_fixture("Puppetfile")) }
   let(:puppetfile_orig) { File.new("spec/unit/fixtures/Puppetfile") }
@@ -17,6 +20,13 @@ describe Reaktor::R10K::Puppetfile do
     FileUtils.cp("spec/unit/fixtures/Puppetfile", "#{git_work_dir[0]}/Puppetfile")
     contents = subject.update_module_ref(mod, branch)
     expect(contents).to include(branch)
+  end
+
+  it 'should update mod testmod2 ref to be branch2 name' do
+    subject.git_work_dir = git_work_dir[0]
+    FileUtils.cp("spec/unit/fixtures/Puppetfile", "#{git_work_dir[0]}/Puppetfile")
+    contents = subject.update_module_ref(mod2, branch2)
+    expect(contents).to include(branch2)
   end
 ##
 #  it 'created should be true' do
