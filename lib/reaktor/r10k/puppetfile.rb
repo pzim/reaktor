@@ -29,12 +29,8 @@ module R10K
     # @param branchname - The ref to change for the module
     def update_module_ref(module_name, branchname)
       pfile = loadFile
-      regex = /mod (["'])#{module_name}\1(.*?)[\n]\s*:ref\s*=>\s*(['"])(\w+|\w+\.\d+\.\d+)\3/m
-
-      new_contents = pfile.gsub(regex, """
-mod '#{module_name}'\\2
-  :ref => '#{branchname}'
-""".strip)
+      regex = /(#{module_name}(\.git)+['"],)+(\s*):ref\s*=>\s*['"](\w+|\w+\.\d+\.\d+)['"]/m
+      new_contents = pfile.gsub!(regex, """\\1\\3:ref => '#{branchname}'""".strip)
     end
 
     def write_new_puppetfile(contents)

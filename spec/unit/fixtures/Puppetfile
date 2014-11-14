@@ -3,7 +3,7 @@ mod 'testmod1',
   :ref => 'RELEASE_1.0.0'
 
 mod 'testmod2',
-  :git => 'git@testing.com:reaktor/testmod2.git',
+  :git => 'git@testing.com:reaktor/myproject-testmod2.git',
   :ref => 'RELEASE_2.0.10'
 
 mod 'testmod3',
