@@ -7,5 +7,6 @@ module Reaktor
     require 'gitaction/action_controller'
     require 'utils/github_payload'
     require 'utils/gitlab_payload'
+    require 'utils/stash_payload'
   end
 end
