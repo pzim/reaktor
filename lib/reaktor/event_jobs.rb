@@ -7,5 +7,6 @@ module Reaktor
     require 'jobs/controller'
     require 'jobs/github_controller'
     require 'jobs/gitlab_controller'
+    require 'jobs/stash_controller'
   end
 end

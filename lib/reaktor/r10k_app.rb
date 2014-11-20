@@ -31,11 +31,10 @@ module Reaktor
     end
 
     post '/stash_payload' do
-      #jsonPayload = json
-      #logger.info("stash payload = #{jsonPayload}")
-      #stash_controller = Reaktor::Jobs::GitlabController.new(jsonPayload)
-      #stash_controller.process_event
-      # not implemented yet
+      jsonPayload = json
+      logger.info("stash payload = #{jsonPayload}")
+      stash_controller = Reaktor::Jobs::StashController.new(jsonPayload, @logger)
+      stash_controller.process_event
     end
 
     ##

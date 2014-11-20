@@ -1,0 +1,35 @@
+{
+    "changesets": {
+        "isLastPage": true,
+        "limit": 500,
+        "size": 0,
+        "start": 0,
+        "values": []
+    },
+    "refChanges": [
+        {
+            "fromHash": "cdffec80a3c1a6381b547e78dc1e7a0e6540f922",
+            "refId": "refs/heads/dev_hook_test",
+            "toHash": "0000000000000000000000000000000000000000",
+            "type": "DELETE"
+        }
+    ],
+    "repository": {
+        "forkable": true,
+        "id": 14,
+        "name": "hooktest",
+        "project": {
+            "description": "Repositories for Puppet",
+            "id": 21,
+            "key": "PUP",
+            "name": "Puppet",
+            "public": true,
+            "type": "NORMAL"
+        },
+        "public": false,
+        "scmId": "git",
+        "slug": "hooktest",
+        "state": "AVAILABLE",
+        "statusMessage": "Available"
+    }
+}
