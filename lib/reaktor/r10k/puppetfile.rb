@@ -23,6 +23,22 @@ module R10K
       contents = File.read("#{@git_work_dir}/Puppetfile")
     end
 
+    # Retrieve the module's name in Puppetfile. Using Puppetfile as source of truth for the module names
+    #
+    # @param repo_name - The repo name assiociated with the module
+    def get_module_name(repo_name)
+      pfile = loadFile
+      regex = /mod ["'](\w*)["'],\s*$\n^(\s*):git\s*=>\s*["'].*#{repo_name}.git',$/
+      new_contents = pfile.match(regex)
+      if new_contents
+        module_name = new_contents[1]
+      else
+        module_name = logger.info("ERROR - VERIFY YOU PUPPETFILE SYNTAX - Repository: #{repo_name} - Git url: #{@git_url}")
+      end
+      module_name
+    end
+    
+    
     # update the module ref in Puppetfile
     #
     # @param module_name - The module to change the ref for
