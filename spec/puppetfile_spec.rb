@@ -35,7 +35,7 @@ describe Reaktor::R10K::Puppetfile do
     subject.git_work_dir = git_work_dir[0]
     FileUtils.cp("spec/unit/fixtures/Puppetfile", "#{git_work_dir[0]}/Puppetfile")
     contents = subject.get_module_name(repo_name)
-    expect(contents).to include(mod2)
+    expect(contents).to eq(mod2)    
   end
 
 ##
