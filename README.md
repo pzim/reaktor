@@ -70,7 +70,15 @@ name of hipchat room to send reaktor/r10k output notifications
 
 user to send hipchat notifications as  
 
-## Host and Port Configuration
+##### RESQUE_WORKER_USER (defaults to 'jenkins')
+
+user used to start resque processes
+
+##### RESQUE_WORKER_GROUP (defaults to 'jenkins')
+
+group used to start resque processes
+
+## Host and Port Configuration (for thin server)
 Host and Port configuration is handled in the [reaktor/reaktor-cfg.yml](https://github.com/pzim/reaktor/blob/master/reaktor-cfg.yml) file: 
  
 - The 'address' key is where you configure the hostname  
@@ -84,6 +92,10 @@ These are the most important bits to configure, as they help make up the url for
 The resultant url (assuming you are using GitHub or GitHub Enterprise):  
 
 - http://myserver-01.puppet.com:4500/github_payload
+
+Or, if you are using Atlassian Stash:
+
+- http://myserver-01.puppet.com:4500/stash_payload
 
 This is the url you would configure in the GitHub ServiceHooks Webhook URL for each internal puppet module.  
 
