@@ -44,6 +44,10 @@ module Notifiers
 
     def room_exist?(room_name)
       rooms = @hipchat.rooms_list
+      if rooms['error'] and rooms['error']['code'] !~ /^2\d+/
+        @logger.error "#{rooms['error']['code']} - #{rooms['error']['message']}"
+        false
+      end
       room = rooms['rooms'].select { |x| x['name'] == room_name }
       @logger.info("room = #{room}")
       room.empty? ? false : true

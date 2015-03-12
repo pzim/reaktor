@@ -60,7 +60,7 @@ export PUPPETFILE_GIT_URL="git@github.com:_org_/puppetfile.git"
 
 ##### REAKTOR_HIPCHAT_TOKEN (required if using hipchat)
 
-auth token to enable posting hipchat messages
+auth token to enable posting hipchat messages. this cannot be a 'notification' token, as reaktor needs to be able to get a room list.
 
 ##### REAKTOR_HIPCHAT_ROOM (required if using hipchat)
 
