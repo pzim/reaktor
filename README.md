@@ -2,7 +2,7 @@
 
 ## Description
 
-Reaktor is a modular post-receive hook designed to work with [r10k](https://github.com/adrienthebo/r10k). It provides the energy to power the 10,000 killer robots in your [Puppet](http://puppetlabs.com/) infrastructure. The goal of reaktor is to automate as much as possible from the time puppet code is pushed through the point at which that code is deployed to your puppet masters and you've been notified accordingly. In most circumstances, there is no longer a need to manually edit the Puppetfile and ssh into the puppet masters to run r10k. 
+Reaktor is a modular post-receive hook designed to work with [r10k](https://github.com/adrienthebo/r10k). It provides the energy to power the 10,000 killer robots in your [Puppet](http://puppetlabs.com/) infrastructure. The goal of reaktor is to automate as much as possible from the time puppet code is pushed through the point at which that code is deployed to your puppet masters and you've been notified accordingly. In most circumstances, there is no longer a need to manually edit the Puppetfile and ssh into the puppet masters to run r10k.
 
 ## Deeper Dive
 
@@ -78,6 +78,10 @@ user used to start resque processes
 
 group used to start resque processes
 
+##### RACK_ENV (defaults to '/data/apps/sinatra/reaktor')
+
+set this to the fully qualified path where you installed reaktor (temporary until code is modified to auto-discover base dir)
+
 ## Host and Port Configuration (for thin server)
 Host and Port configuration is handled in the [reaktor/reaktor-cfg.yml](https://github.com/pzim/reaktor/blob/master/reaktor-cfg.yml) file: 
  
@@ -117,7 +121,3 @@ In order to implement a custom notifier do the following:
 - the new .rb file must implement the **_update_** method (again, use hipchat.rb as a reference)
 - remove hipchat.rb from the active_notifiers dir
 - restart the post-receive hook (rake stop; rake start)  
-
-
-
-
