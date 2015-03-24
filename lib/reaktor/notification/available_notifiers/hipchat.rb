@@ -15,7 +15,12 @@ module Notifiers
       token        = env['REAKTOR_HIPCHAT_TOKEN']
       @room_id     = env['REAKTOR_HIPCHAT_ROOM']
       @from        = env['REAKTOR_HIPCHAT_FROM']
-      @hipchat = HipChat::API.new(token)
+      hipchat_url  = env['REAKTOR_HIPCHAT_URL']
+      if hipchat_url.nil? or hipchat_url.empty?
+        @hipchat = HipChat::API.new(token)
+      else
+        @hipchat = HipChat::API.new(token, hipchat_url)
+      end
       @logger.info("token = #{token}")
       # ensure room_id exists
       if not room_exist? @room_id
