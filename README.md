@@ -14,45 +14,45 @@ Reaktor utilizes [resque](https://github.com/resque/resque) to provide event pro
 
 ### Requirements
 
-	- Ruby (tested and verified with 1.9.3)
-	- Git
-	- Redis (needed for resque to work properly)
-	
+    - Ruby (tested and verified with 1.9.3)
+    - Git
+    - Redis (needed for resque to work properly)
+
 ### Installation
 
-git clone git://github.com/pzim/reaktor  
-cd reaktor  
+git clone git://github.com/pzim/reaktor
+cd reaktor
 bundle install
 
 ### User Requirements
 
-The user you install and run reaktor as needs to have ssh trusts set up to the puppet masters.  
-  
-That same user must also have git commit privileges to your Github or Github Enterprise puppet module and puppetfile repositories. 
+The user you install and run reaktor as needs to have ssh trusts set up to the puppet masters.
+
+That same user must also have git commit privileges to your Github or Github Enterprise puppet module and puppetfile repositories.
 
 ### Starting the post-receive hook
-** ensure redis is installed and running **  
-cd reaktor  
-rake start (starts the post-receive hook and the resque workers)  
+** ensure redis is installed and running **
+cd reaktor
+rake start (starts the post-receive hook and the resque workers)
 
 ```
 [jenkins@puppet-ci-01 reaktor]$ rake start
-Starting server on puppet-ci-01.lab.webapps.rr.com:4570 ...  
+Starting server on puppet-ci-01.lab.webapps.rr.com:4570 ...
 ```
 
 ### Environment Variables
 
-Reaktor makes use of the following environment variables for configuration:  
+Reaktor makes use of the following environment variables for configuration:
 
-##### REAKTOR_PUPPET_MASTERS_FILE (required) 
+##### REAKTOR_PUPPET_MASTERS_FILE (required)
 
-export REAKTOR_PUPPET_MASTERS_FILE="/path/to/masters.txt"  
+export REAKTOR_PUPPET_MASTERS_FILE="/path/to/masters.txt"
 
-Location of file containing all puppet masters. Each entry on a single line:  
+Location of file containing all puppet masters. Each entry on a single line:
 
-puppet-master-01  
-puppet-master-02  
-...  
+puppet-master-01
+puppet-master-02
+...
 
 ##### PUPPETFILE_GIT_URL (required)
 
@@ -68,7 +68,11 @@ name of hipchat room to send reaktor/r10k output notifications
 
 ##### REAKTOR_HIPCHAT_FROM (required if using hipchat)
 
-user to send hipchat notifications as  
+user to send hipchat notifications as
+
+##### REAKTOR_HIPCHAT_URL (required if using hipchat local server)
+
+full url of server v1 api. ie: 'https://hipchat.foo.bar/v1'
 
 ##### RESQUE_WORKER_USER (defaults to 'jenkins')
 
@@ -83,17 +87,17 @@ group used to start resque processes
 set this to the fully qualified path where you installed reaktor (temporary until code is modified to auto-discover base dir)
 
 ## Host and Port Configuration (for thin server)
-Host and Port configuration is handled in the [reaktor/reaktor-cfg.yml](https://github.com/pzim/reaktor/blob/master/reaktor-cfg.yml) file: 
- 
-- The 'address' key is where you configure the hostname  
+Host and Port configuration is handled in the [reaktor/reaktor-cfg.yml](https://github.com/pzim/reaktor/blob/master/reaktor-cfg.yml) file:
+
+- The 'address' key is where you configure the hostname
 - The 'port' key is where you configure what port to listen on
 
-These are the most important bits to configure, as they help make up the url for the webhook setting in your git repo config. For example: 
- 
+These are the most important bits to configure, as they help make up the url for the webhook setting in your git repo config. For example:
+
 - address: myserver-01.puppet.com
 - port: 4500
 
-The resultant url (assuming you are using GitHub or GitHub Enterprise):  
+The resultant url (assuming you are using GitHub or GitHub Enterprise):
 
 - http://myserver-01.puppet.com:4500/github_payload
 
@@ -101,23 +105,23 @@ Or, if you are using Atlassian Stash:
 
 - http://myserver-01.puppet.com:4500/stash_payload
 
-This is the url you would configure in the GitHub ServiceHooks Webhook URL for each internal puppet module.  
+This is the url you would configure in the GitHub ServiceHooks Webhook URL for each internal puppet module.
 
-The reaktor/reaktor-cfg.yml has additional items that you can configure, including pidfile and log. 
+The reaktor/reaktor-cfg.yml has additional items that you can configure, including pidfile and log.
 
 
-## Pluggable Notifications  
-The default IM tool for receiving reaktor notifications is [hipchat](http://hipchat.com). By setting the appropriate HIPCHAT-related environment variables above, you will receive hipchat notifications automatically.  
+## Pluggable Notifications
+The default IM tool for receiving reaktor notifications is [hipchat](http://hipchat.com). By setting the appropriate HIPCHAT-related environment variables above, you will receive hipchat notifications automatically.
 
-If you use a different IM tool, such as campfire or slack, you will need to implement the notifier accordingly. This is fairly straightforward. There are 2 directories under reaktor/lib/reaktor/notification: 
- 
-- active_notifiers (holds currently active notifiers) 
-- available_notifiers (holds potential notifiers, but these aren't live)  
+If you use a different IM tool, such as campfire or slack, you will need to implement the notifier accordingly. This is fairly straightforward. There are 2 directories under reaktor/lib/reaktor/notification:
 
-In order to implement a custom notifier do the following:  
+- active_notifiers (holds currently active notifiers)
+- available_notifiers (holds potential notifiers, but these aren't live)
+
+In order to implement a custom notifier do the following:
 
 - create the .rb file for your notifier and place it under the active_notifiers dir
 - use the hipchat.rb as a reference, replacing 'class Hipchat' with an appropriate name, such as 'class Slack' (there is a dummy slack.rb file in available_notifiers as well)
 - the new .rb file must implement the **_update_** method (again, use hipchat.rb as a reference)
 - remove hipchat.rb from the active_notifiers dir
-- restart the post-receive hook (rake stop; rake start)  
+- restart the post-receive hook (rake stop; rake start)
