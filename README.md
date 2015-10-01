@@ -82,7 +82,7 @@ user used to start resque processes
 
 group used to start resque processes
 
-##### RACK_ENV (defaults to '/data/apps/sinatra/reaktor')
+##### RACK_ROOT (defaults to '/data/apps/sinatra/reaktor')
 
 set this to the fully qualified path where you installed reaktor (temporary until code is modified to auto-discover base dir)
 
