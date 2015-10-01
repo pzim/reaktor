@@ -8,7 +8,9 @@ Reaktor is a modular post-receive hook designed to work with [r10k](https://gith
 
 Reaktor uses r10k to deploy your changes to all of your puppet masters and notifies you when it's finished so you know when your environment is ready.
 
-Reaktor not only supports [puppet dynamic environments (via r10k)](http://puppetlabs.com/blog/git-workflow-and-puppet-environments), but also allows for Puppetfile dynamic branch creation. It provides notifications to [hipchat](http://hipchat.com) by default, but notifications are pluggable to work with other chat providers/notification types, e.g., [campfire](https://campfirenow.com/) and [slack](https://slack.com/). The default configuration supports [git webhook](https://developer.github.com/webhooks/) payloads from GitHub and GitHub Enterprise. The framework can be extended to support other git payload sources, such as [Stash](https://www.atlassian.com/software/stash).
+Reaktor not only supports [puppet dynamic environments (via r10k)](http://puppetlabs.com/blog/git-workflow-and-puppet-environments), but also allows for Puppetfile dynamic branch creation. It provides notifications to [hipchat](http://hipchat.com) by default, but notifications are pluggable to work with other chat providers/notification types, e.g., [campfire](https://campfirenow.com/) and [slack](https://slack.com/). The default configuration supports [git webhook](https://developer.github.com/webhooks/) payloads from GitHub and GitHub Enterprise. In addition, reaktor supports the following git sources:  
+ 	- [Stash](https://www.atlassian.com/software/stash)  
+ 	- [Gitlab](https://about.gitlab.com/)
 
 Reaktor utilizes [resque](https://github.com/resque/resque) to provide event processing necessary for efficient puppet development workflow. Resque provides its own sinatra app to help monitor the state of events in the system.
 
@@ -20,8 +22,8 @@ Reaktor utilizes [resque](https://github.com/resque/resque) to provide event pro
 
 ### Installation
 
-git clone git://github.com/pzim/reaktor
-cd reaktor
+git clone git://github.com/pzim/reaktor  
+cd reaktor  
 bundle install
 
 ### User Requirements
@@ -101,9 +103,13 @@ The resultant url (assuming you are using GitHub or GitHub Enterprise):
 
 - http://myserver-01.puppet.com:4500/github_payload
 
-Or, if you are using Atlassian Stash:
+If you are using Atlassian Stash:
 
-- http://myserver-01.puppet.com:4500/stash_payload
+- http://myserver-01.puppet.com:4500/stash_payload  
+
+If you are using Gitlab:
+
+- http://myserver-01.puppet.com:4500/gitlab_payload
 
 This is the url you would configure in the GitHub ServiceHooks Webhook URL for each internal puppet module.
 
