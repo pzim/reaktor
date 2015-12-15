@@ -6,7 +6,7 @@
   "deleted": false,
   "forced": true,
   "base_ref": "refs/heads/master",
-  "compare": "https://github.webapps.rr.com/fylgia/webhook_test_two/compare/dev_hook_test",
+  "compare": "https://test-server-01.com/webhook_test_two/compare/dev_hook_test",
   "commits": [
     
   ],
@@ -15,15 +15,15 @@
     "distinct": true,
     "message": "new files",
     "timestamp": "2014-04-11T19:54:04+00:00",
-    "url": "https://github.webapps.rr.com/fylgia/webhook_test_two/commit/88adbbc742fac0152915555bb062a04ddf63cef7",
+    "url": "https://test-server-01.com/webhook_test_two/commit/88adbbc742fac0152915555bb062a04ddf63cef7",
     "author": {
       "name": "pzimmer",
-      "email": "phil.zimmerman@twcable.com",
+      "email": "pzimmerman.home.com",
       "username": "pzimmer"
     },
     "committer": {
       "name": "pzimmer",
-      "email": "phil.zimmerman@twcable.com",
+      "email": "pzimmerman.home@gmail.com",
       "username": "pzimmer"
     },
     "added": [
@@ -44,7 +44,7 @@
   "repository": {
     "id": 1025,
     "name": "webhook_test_two",
-    "url": "https://github.webapps.rr.com/fylgia/webhook_test_two",
+    "url": "https://test-server-01.com/webhook_test_two",
     "description": "",
     "watchers": 0,
     "stargazers": 0,
@@ -68,6 +68,6 @@
   },
   "pusher": {
     "name": "pzimmer",
-    "email": "phil.zimmerman@twcable.com"
+    "email": "pzimmerman.home@gmail.com",
   }
 }

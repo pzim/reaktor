@@ -5,7 +5,7 @@
   "created": false,
   "deleted": true,
   "forced": true,
-  "compare": "https:\/\/github.webapps.rr.com\/fylgia\/webhook_test_two\/compare\/88adbbc742fa...000000000000",
+  "compare": "https:\/\/test-server-01.com\/fylgia\/webhook_test_two\/compare\/88adbbc742fa...000000000000",
   "commits": [
     
   ],
@@ -13,7 +13,7 @@
   "repository": {
     "id": 1025,
     "name": "webhook_test_two",
-    "url": "https:\/\/github.webapps.rr.com\/fylgia\/webhook_test_two",
+    "url": "https:\/\/test-server-01.com\/fylgia\/webhook_test_two",
     "description": "",
     "watchers": 0,
     "stargazers": 0,
@@ -37,6 +37,6 @@
   },
   "pusher": {
     "name": "pzimmer",
-    "email": "phil.zimmerman@twcable.com"
+    "email": "pzimmerman.home@gmail.com",
   }
 }

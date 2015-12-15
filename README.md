@@ -38,8 +38,8 @@ cd reaktor
 rake start (starts the post-receive hook and the resque workers)
 
 ```
-[jenkins@puppet-ci-01 reaktor]$ rake start
-Starting server on puppet-ci-01.lab.webapps.rr.com:4570 ...
+[jenkins@test-box-01 reaktor]$ rake start
+Starting server on test-box-01:4570 ...
 ```
 
 ### Environment Variables
