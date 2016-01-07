@@ -28,7 +28,7 @@ module R10K
     # @param repo_name - The repo name assiociated with the module
     def get_module_name(repo_name)
       pfile = loadFile
-      regex = /mod ["'](\w*)["'],\s*$\n^(\s*):git\s*=>\s*["'].*#{repo_name}.git',$/
+      regex = /mod ["'](\w*)["'],\s*$\n^(\s*):git\s*=>\s*["'].*#{repo_name}.git["'],$/
       new_contents = pfile.match(regex)
       if new_contents
         module_name = new_contents[1]
