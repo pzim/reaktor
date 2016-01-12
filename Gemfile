@@ -23,6 +23,8 @@ gem 'capistrano', '2.15.5'
 group :test do
   gem 'rspec', '3.0.0'
   gem 'rack-test', '0.6.2'
+  gem "codeclimate-test-reporter", require: false
+  gem 'coveralls', require: false
 end
 
 if File.exists? "#{__FILE__}.local"

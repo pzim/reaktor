@@ -8,5 +8,7 @@ rvm:
   - 2.0
   - 2.1
   - 2.2
-  - 2.3
-  - ruby-head
+
+addons:
+  code_climate:
+    repo_token: 5dd2eac7c40c2466c29b125d67e13f3d49f110618e41ec4c9de9d003994f83fc

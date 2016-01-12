@@ -26,6 +26,11 @@ require 'rspec'
 require 'json'
 require 'yaml'
 
+require "codeclimate-test-reporter"
+CodeClimate::TestReporter.start
+require 'coveralls'
+Coveralls.wear!
+
 PROJECT_ROOT = File.expand_path("../../lib/reaktor", __FILE__)
 SPEC_ROOT    = File.expand_path("../lib/reaktor",    __FILE__)
 
