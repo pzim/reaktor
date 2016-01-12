@@ -11,6 +11,11 @@ gem 'resque-retry', '1.1.4'
 gem 'thin', '1.6.2'
 gem 'god', '0.13.4'
 
+# Pin versions for old ruby
+if RUBY_VERSION.to_f < 2.0
+  gem 'net-ssh', '2.9.1'
+end
+
 ## gems for hipchat-api
 gem 'hipchat-api', '1.0.6'
 gem 'capistrano', '2.15.5'
