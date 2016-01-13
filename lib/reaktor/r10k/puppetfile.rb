@@ -34,7 +34,6 @@ module Reaktor
           module_name = new_contents[1]
         else
           logger.info("ERROR - VERIFY YOU PUPPETFILE SYNTAX - Repository: #{repo_name} - Git url: #{@git_url}")
-          raise
         end
         module_name
       end
@@ -51,11 +50,15 @@ module Reaktor
       end
 
       def write_new_puppetfile(contents)
-        puppetfile = File.open("#{@git_work_dir}/Puppetfile", "w")
-        puppetfile.write(contents)
-        puppetfile.close()
-        p_file_after_write = `cat #{@git_work_dir}/Puppetfile`
-        logger.info("modified puppetfile: #{p_file_after_write}")
+        if contents
+          puppetfile = File.open("#{@git_work_dir}/Puppetfile", "w")
+          puppetfile.write(contents)
+          puppetfile.close()
+          p_file_after_write = `cat #{@git_work_dir}/Puppetfile`
+          logger.info("modified puppetfile: #{p_file_after_write}")
+        else
+          logger.info("Wont create empty Puppetfile")
+        end
       end
     end
   end

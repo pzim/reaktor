@@ -68,19 +68,19 @@ describe Reaktor::R10K::Puppetfile do
     expect(File.open("#{subject.git_work_dir}/Puppetfile", "r").read).to include("mod 'testmod2',")
   end
 
-  it 'should retrieve testmod3 as module name' do
+  it 'should not retrieve testmod3 without `ref` as module name' do
     subject.git_work_dir = git_work_dir
     contents = subject.get_module_name(repo_name3)
-    expect(contents).to eq(mod3)
+    expect(contents).to eq(nil)
   end
 
-  it 'should update mod testmod3 ref to be branch3 name' do
+  it 'should have contents equal to nil if mod testmod3 doesn\'t have `ref`' do
     subject.git_work_dir = git_work_dir
     contents = subject.update_module_ref(mod3, branch3)
-    expect(contents).to include(branch3)
+    expect(contents).to be_nil
   end
 
-  it 'should write mod testmod3 to Puppetfile correctly' do
+  it 'should not write empty Puppetfile if mod testmod3 doesnt have `ref`' do
     subject.git_work_dir = git_work_dir
     contents = subject.update_module_ref(mod3, branch3)
     subject.write_new_puppetfile(contents)
