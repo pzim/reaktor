@@ -9,3 +9,5 @@ mod 'testmod2',
 mod 'testmod3',
   :git => 'git@testing.com:reaktor/testmod3.git',
   :tag => 'RELEASE_10.2.3'
+
+
