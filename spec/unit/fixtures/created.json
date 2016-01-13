@@ -8,7 +8,7 @@
   "base_ref": "refs/heads/master",
   "compare": "https://test-server-01.com/webhook_test_two/compare/dev_hook_test",
   "commits": [
-    
+
   ],
   "head_commit": {
     "id": "88adbbc742fac0152915555bb062a04ddf63cef7",
@@ -35,10 +35,10 @@
       "spec/spec_helper.rb"
     ],
     "removed": [
-      
+
     ],
     "modified": [
-      
+
     ]
   },
   "repository": {
@@ -68,6 +68,6 @@
   },
   "pusher": {
     "name": "pzimmer",
-    "email": "pzimmerman.home@gmail.com",
+    "email": "pzimmerman.home@gmail.com"
   }
 }

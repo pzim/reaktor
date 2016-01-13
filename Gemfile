@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 gem 'rake', '10.3.2'
 gem 'sinatra', '1.4.5'
 gem 'sinatra-contrib', '1.4.2'
-gem 'json', '1.8.1'
+gem 'json', '~> 1.8'
 gem 'redis', '3.0.7'
 gem 'redis-objects', '0.9.1'
 gem 'resque', '1.25.2'
@@ -23,7 +23,9 @@ gem 'capistrano', '2.15.5'
 group :test do
   gem 'rspec', '3.0.0'
   gem 'rack-test', '0.6.2'
-  gem "codeclimate-test-reporter", require: false
+  gem 'jsonlint'
+  gem 'guard-rake'
+  gem 'codeclimate-test-reporter', require: false
   gem 'coveralls', require: false
 end
 

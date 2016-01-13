@@ -7,7 +7,7 @@
   "forced": true,
   "compare": "https:\/\/test-server-01.com\/fylgia\/webhook_test_two\/compare\/88adbbc742fa...000000000000",
   "commits": [
-    
+
   ],
   "head_commit": null,
   "repository": {
@@ -37,6 +37,6 @@
   },
   "pusher": {
     "name": "pzimmer",
-    "email": "pzimmerman.home@gmail.com",
+    "email": "pzimmerman.home@gmail.com"
   }
 }
