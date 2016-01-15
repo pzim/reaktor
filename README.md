@@ -1,5 +1,13 @@
 # Reaktor
 
+[![Build Status](https://travis-ci.org/timhughes/reaktor.svg?branch=master)](https://travis-ci.org/timhughes/reaktor)
+[![Coverage Status](https://coveralls.io/repos/timhughes/reaktor/badge.svg?branch=master&service=github)](https://coveralls.io/github/timhughes/reaktor?branch=master)
+
+[![Code Climate](https://codeclimate.com/github/timhughes/reaktor/badges/gpa.svg)](https://codeclimate.com/github/timhughes/reaktor)
+[![Test Coverage](https://codeclimate.com/github/timhughes/reaktor/badges/coverage.svg)](https://codeclimate.com/github/timhughes/reaktor/coverage)
+[![Issue Count](https://codeclimate.com/github/timhughes/reaktor/badges/issue_count.svg)](https://codeclimate.com/github/timhughes/reaktor)
+
+
 ## Description
 
 Reaktor is a modular post-receive hook designed to work with [r10k](https://github.com/adrienthebo/r10k). It provides the energy to power the 10,000 killer robots in your [Puppet](http://puppetlabs.com/) infrastructure. The goal of reaktor is to automate as much as possible from the time puppet code is pushed through the point at which that code is deployed to your puppet masters and you've been notified accordingly. In most circumstances, there is no longer a need to manually edit the Puppetfile and ssh into the puppet masters to run r10k.
