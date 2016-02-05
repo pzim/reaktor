@@ -22,7 +22,7 @@ module Reaktor
         repo_ref = payload['ref']
         @created = created?(payload['before'])
         @deleted = deleted?(payload['after'])
-        ref_array = repo_ref.split("/")
+        ref_array = repo_ref.split("/", 3)
         @ref_type = ref_array[1]
         @branch_name = ref_array[2]
       end
