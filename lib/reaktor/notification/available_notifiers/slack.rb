@@ -1,4 +1,4 @@
-#require 'slack-api'
+# require 'slack-api'
 require 'logger'
 
 ## Dummy slack.rb notifier template. Use as a reference to implement a functional slack notifier
@@ -19,9 +19,9 @@ module Notifiers
       @slack       = SLACK::API.new(token)
       @logger.info("token = #{token}")
       # ensure room_id exists
-      if not slack_room_exist? @room_id
+      unless slack_room_exist? @room_id
         @logger.info("The defined room_id: #{@room_id} does not exist.")
-        @logger.info("Slack messages cannot be sent until a valid room is defined.")
+        @logger.info('Slack messages cannot be sent until a valid room is defined.')
       end
     end
 
@@ -34,8 +34,7 @@ module Notifiers
     end
 
     def slack_room_exist?(room_name)
-      #implement slack-specific logic here
+      # implement slack-specific logic here
     end
-
   end
 end

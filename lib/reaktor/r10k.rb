@@ -4,4 +4,3 @@ module Reaktor
     require 'r10k/deploy'
   end
 end
-

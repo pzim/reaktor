@@ -5,7 +5,6 @@ require 'logger'
 module Reaktor
   module Jobs
     class GitLabController < Controller
-
       # process the event - enqueue and let the relevant action class
       # do the processing
       def process_event
@@ -18,24 +17,23 @@ module Reaktor
         @deleted = @git_payload.deleted
 
         if @created && isBranch(ref_type)
-          logger.info("Create Event")
+          logger.info('Create Event')
           enqueue_event(CreateEvent, repo_name, branch_name)
         end
 
         if @deleted && isBranch(ref_type)
-          logger.info("Delete Event")
+          logger.info('Delete Event')
           enqueue_event(DeleteEvent, repo_name, branch_name)
         end
 
         if !@created && !@deleted
-          logger.info("Modify Event")
+          logger.info('Modify Event')
           enqueue_event(ModifyEvent, repo_name, branch_name)
         end
-
       end
 
       def isBranch(refType)
-        return refType == "heads"
+        refType == 'heads'
       end
     end
   end

@@ -6,7 +6,6 @@ require 'event_jobs'
 module Reaktor
   module Jobs
     class StashController < Controller
-
       ##
       # process the event - enqueue and let the relevant action class
       # do the processing
@@ -20,31 +19,28 @@ module Reaktor
         @created = @git_payload.created
         @deleted = @git_payload.deleted
 
-        #temp for testing
-        #Notification::Notifier.instance.notification = "branch_name = #{branch_name}"
-        
+        # temp for testing
+        # Notification::Notifier.instance.notification = "branch_name = #{branch_name}"
+
         if @created && isBranch(ref_type)
-          logger.info("Create Event")
+          logger.info('Create Event')
           enqueue_event(CreateEvent, repo_name, branch_name)
         end
 
         if @deleted && isBranch(ref_type)
-          logger.info("Delete Event")
+          logger.info('Delete Event')
           enqueue_event(DeleteEvent, repo_name, branch_name)
         end
 
         if !@created && !@deleted
-          logger.info("Modify Event")
+          logger.info('Modify Event')
           enqueue_event(ModifyEvent, repo_name, branch_name)
         end
-
       end
 
       def isBranch(refType)
-        return refType == "heads"
+        refType == 'heads'
       end
     end
   end
 end
-
-

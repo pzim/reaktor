@@ -4,4 +4,3 @@ module Reaktor
     require 'git/workdir'
   end
 end
-

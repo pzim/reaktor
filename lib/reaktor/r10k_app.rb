@@ -11,10 +11,9 @@ require 'logger'
 
 module Reaktor
   class R10KApp < Sinatra::Base
-
-    rack_root   = ENV['RACK_ROOT'] || "/data/apps/sinatra/reaktor"
+    rack_root   = ENV['RACK_ROOT'] || '/data/apps/sinatra/reaktor'
     reaktor_log = ENV['REAKTOR_LOG'] || "#{rack_root}/reaktor.log"
-    logger ||= Logger.new("#{reaktor_log}", Logger::INFO)
+    logger ||= Logger.new(reaktor_log.to_s, Logger::INFO)
 
     # endpoint for github/github enterprise payloads
     post '/github_payload' do
@@ -44,7 +43,7 @@ module Reaktor
     end
 
     def response_headers
-      @response_headers ||= {'Content-Type' => 'application/json'}
+      @response_headers ||= { 'Content-Type' => 'application/json' }
     end
 
     ##
