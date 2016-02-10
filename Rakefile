@@ -1,5 +1,9 @@
 $LOAD_PATH.unshift("#{File.expand_path('..', __FILE__)}/lib/reaktor")
 #$LOAD_PATH.unshift(File.expand_path('../lib', __FILE__))
+require 'bundler/gem_tasks'
+require 'rspec/core/rake_task'
+require 'jsonlint/rake_task'
+
 require 'resque/tasks'
 require 'envconfig'
 require 'event_jobs'
