@@ -22,14 +22,19 @@ if $LOADED_FEATURES.grep(/spec\/spec_helper\.rb/).any?
 end
 
 require 'rspec'
-#require 'rack/test'
 require 'json'
 require 'yaml'
 
 require "codeclimate-test-reporter"
 CodeClimate::TestReporter.start
+require 'simplecov'
 require 'coveralls'
-Coveralls.wear!
+
+SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
+  SimpleCov::Formatter::HTMLFormatter,
+  Coveralls::SimpleCov::Formatter
+]
+SimpleCov.start
 
 PROJECT_ROOT = File.expand_path("../../lib/reaktor", __FILE__)
 SPEC_ROOT    = File.expand_path("../lib/reaktor",    __FILE__)
@@ -49,33 +54,10 @@ module Test
   end
 end
 
-#require 'shared-contexts'
 
 # FIXME much of this configuration is duplicated in the :environment task in
 # the Rakefile
 RSpec.configure do |config|
   ENV['RACK_ENV'] = 'test'
   include Test::Methods
-
-#  config.mock_with :rspec
-
-  #config.before :all do
-  #  Reaktor::Envconfig.init_environment(ENV['RACK_ENV'])
-  #end
 end
-
-#RSpec::Matchers.define :have_status do |expected_status|
-#  match do |actual|
-#    actual.status == expected_status
-#  end
-#  description do
-#    "have a #{expected_status} status"
-# end
-#  failure_message_for_should do |actual|
-#    <<-EOM
-#expected the response to have a #{expected_status} status but got a #{actual.status}.
-#Errors:
-#{actual.errors}
-#   EOM
-#  end
-#end
