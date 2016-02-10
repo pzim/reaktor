@@ -1,5 +1,3 @@
-$LOAD_PATH.unshift("#{File.expand_path('..', __FILE__)}/lib/reaktor")
-# $LOAD_PATH.unshift(File.expand_path('../lib', __FILE__))
 # ---- start common Rakefile  -----
 require 'bundler/gem_tasks'
 require 'rspec/core/rake_task'
@@ -44,8 +42,8 @@ task test: [
 # ---- end common Rakefile  -----
 
 require 'resque/tasks'
-require 'envconfig'
-require 'event_jobs'
+require 'reaktor/envconfig'
+require 'reaktor/event_jobs'
 
 ENV['RACK_ENV'] ||= 'production'
 desc 'Start the rack server`'

@@ -1,12 +1,12 @@
 module Reaktor
   module EventJobs
-    require 'jobs/event'
-    require 'jobs/create_event'
-    require 'jobs/delete_event'
-    require 'jobs/modify_event'
-    require 'jobs/controller'
-    require 'jobs/github_controller'
-    require 'jobs/gitlab_controller'
-    require 'jobs/stash_controller'
+    require 'reaktor/jobs/event'
+    require 'reaktor/jobs/create_event'
+    require 'reaktor/jobs/delete_event'
+    require 'reaktor/jobs/modify_event'
+    require 'reaktor/jobs/controller'
+    require 'reaktor/jobs/github_controller'
+    require 'reaktor/jobs/gitlab_controller'
+    require 'reaktor/jobs/stash_controller'
   end
 end

@@ -1,4 +1,5 @@
 # figure out where we are being loaded from
+ENV['RACK_ENV'] = 'test'
 if $LOADED_FEATURES.grep(/spec\/spec_helper\.rb/).any?
   begin
     raise 'foo'
@@ -20,35 +21,30 @@ if $LOADED_FEATURES.grep(/spec\/spec_helper\.rb/).any?
     MSG
   end
 end
-
-require 'rspec'
-require 'json'
-require 'yaml'
-
-require 'codeclimate-test-reporter'
-CodeClimate::TestReporter.start
 require 'simplecov'
 require 'coveralls'
-
 SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
   SimpleCov::Formatter::HTMLFormatter,
   Coveralls::SimpleCov::Formatter
 ]
-SimpleCov.start
+SimpleCov.start do
+  add_group 'Tests', 'spec'
+  add_group 'App', 'lib'
+end
 
-PROJECT_ROOT = File.expand_path('../../lib/reaktor', __FILE__)
-SPEC_ROOT    = File.expand_path('../lib/reaktor',    __FILE__)
+require 'rspec'
+require 'json'
+require 'yaml'
+require 'rack/test'
+require 'codeclimate-test-reporter'
+CodeClimate::TestReporter.start
 
-$LOAD_PATH.unshift(PROJECT_ROOT).unshift(SPEC_ROOT)
+require 'resque_spec'
+require 'reaktor/server'
 
 module Test
   module Methods
     def read_fixture(name)
-      # f = File.open("spec/unit/fixtures/created.json", "r")
-      # f.each_line do |line|
-      #  puts line
-      # end
-      # f.close
       File.read(File.join(File.expand_path('..', __FILE__), 'unit', 'fixtures', name))
     end
   end
@@ -56,7 +52,12 @@ end
 
 # FIXME: much of this configuration is duplicated in the :environment task in
 # the Rakefile
-RSpec.configure do |_config|
-  ENV['RACK_ENV'] = 'test'
+RSpec.configure do |config|
+  config.include Rack::Test::Methods
+
+  config.before(:each) do
+    ResqueSpec.reset!
+  end
+
   include Test::Methods
 end

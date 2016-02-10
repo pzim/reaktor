@@ -1,4 +1,4 @@
-require 'gitaction/create_action'
+require 'reaktor/gitaction/create_action'
 require 'logger'
 
 module Reaktor

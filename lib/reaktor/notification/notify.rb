@@ -1,5 +1,5 @@
 require 'logger'
-require 'notification'
+require 'reaktor/notification'
 
 module Reaktor
   module Notification

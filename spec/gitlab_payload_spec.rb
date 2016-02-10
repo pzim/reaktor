@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'utils/gitlab_payload'
+require 'reaktor/utils/gitlab_payload'
 require 'json'
 
 describe Reaktor::Utils::GitLabPayload do

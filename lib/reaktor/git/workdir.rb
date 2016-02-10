@@ -1,4 +1,4 @@
-require 'git'
+require 'reaktor/git'
 
 class Reaktor::Git::WorkDir < Reaktor::Git::Repo
   # include Reaktor::Logging

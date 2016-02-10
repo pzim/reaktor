@@ -36,16 +36,17 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_dependency "foreman"
-  spec.add_dependency "god", "0.13.4"
-  spec.add_dependency "json", "~> 1.8"
+  spec.add_dependency "god"
+  spec.add_dependency "json"
   spec.add_dependency "rdiscount"
-  spec.add_dependency "redis", "3.0.7"
-  spec.add_dependency "redis-objects", "0.9.1"
-  spec.add_dependency "resque", "1.25.2"
-  spec.add_dependency "resque-retry", "1.1.4"
-  spec.add_dependency "sinatra", "1.4.5"
-  spec.add_dependency "sinatra-contrib", "1.4.2"
-  spec.add_dependency "thin", "1.6.2"
+  spec.add_dependency "redis"
+  spec.add_dependency "redis-objects"
+  spec.add_dependency "resque"
+  spec.add_dependency "resque-retry"
+  spec.add_dependency "sinatra"
+  spec.add_dependency "sinatra-contrib"
+  spec.add_dependency "thin"
+  spec.add_dependency "shotgun"
   if RUBY_VERSION.to_f < 2.0
     spec.add_dependency "net-ssh", "2.9.1"
   end
@@ -59,9 +60,10 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "coveralls"
   spec.add_development_dependency "guard-rake"
   spec.add_development_dependency "jsonlint"
-  spec.add_development_dependency "rack-test", "0.6.2"
-  spec.add_development_dependency "rake", "~> 10.0"
-  spec.add_development_dependency "rspec", "3.0.0"
+  spec.add_development_dependency "rack-test"
+  spec.add_development_dependency "rake"
+  spec.add_development_dependency "rspec"
   spec.add_development_dependency "rubocop"
+  spec.add_development_dependency "resque_spec"
 end
 

@@ -25,3 +25,4 @@ task 'deploy_module', roles: :puppet_master do
     puts 'Please provide a module name to deploy'
   end
 end
+#  vim: set ft=ruby ts=4 sw=2 tw=80 et :

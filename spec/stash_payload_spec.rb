@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'utils/stash_payload'
+require 'reaktor/utils/stash_payload'
 require 'json'
 
 describe Reaktor::Utils::StashPayload do
@@ -23,9 +23,9 @@ describe Reaktor::Utils::StashPayload do
     expect(deleted).to eql false
   end
 
-  it 'repo name should be hooktest' do
+  it 'repo name should be webhook_test_two' do
     repo_name = subject.repo_name
-    expect(repo_name).to eql 'hooktest'
+    expect(repo_name).to eql 'webhook_test_two'
   end
 end
 
@@ -50,8 +50,8 @@ describe Reaktor::Utils::StashPayload do
     expect(deleted).to eql true
   end
 
-  it 'repo name should be hooktest' do
+  it 'repo name should be webhook_test_two' do
     repo_name = subject.repo_name
-    expect(repo_name).to eql 'hooktest'
+    expect(repo_name).to eql 'webhook_test_two'
   end
 end

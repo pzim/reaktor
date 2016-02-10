@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'notification/notifier'
+require 'reaktor/notification/notifier'
 
 # need to figure out how best to test this, given it's a singleton
 # until then, it's basically commented out

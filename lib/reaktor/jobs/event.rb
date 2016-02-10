@@ -2,8 +2,8 @@ require 'resque'
 require 'resque-retry'
 require 'redis-objects'
 require 'logger'
-require 'gitaction'
-require 'event_jobs'
+require 'reaktor/gitaction'
+require 'reaktor/event_jobs'
 
 module Reaktor
   module Jobs

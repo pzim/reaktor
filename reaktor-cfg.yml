@@ -7,5 +7,5 @@ max_persistent_conns: 512
 timeout: 30
 environment: production
 pid: tmp/pids/reaktor.pid
-log: reaktor.log
-daemonize: true 
+log: log/reaktor.log
+daemonize: true

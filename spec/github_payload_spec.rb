@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'utils/github_payload'
+require 'reaktor/utils/github_payload'
 require 'json'
 
 describe Reaktor::Utils::GitHubPayload do

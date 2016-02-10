@@ -1,4 +1,4 @@
-require 'commandrunner'
+require 'reaktor/commandrunner'
 
 # Define a base class for git repositories.
 class Reaktor::Git::Repo

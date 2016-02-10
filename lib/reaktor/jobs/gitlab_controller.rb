@@ -1,6 +1,6 @@
-require 'event_jobs'
-require 'gitaction'
 require 'logger'
+require 'reaktor/event_jobs'
+require 'reaktor/gitaction'
 
 module Reaktor
   module Jobs
@@ -19,17 +19,21 @@ module Reaktor
         if @created && isBranch(ref_type)
           logger.info('Create Event')
           enqueue_event(CreateEvent, repo_name, branch_name)
+          msg = "Creating environment '#{branch_name}'."
         end
 
         if @deleted && isBranch(ref_type)
           logger.info('Delete Event')
           enqueue_event(DeleteEvent, repo_name, branch_name)
+          msg = "Deleting environment '#{branch_name}'."
         end
 
         if !@created && !@deleted
           logger.info('Modify Event')
           enqueue_event(ModifyEvent, repo_name, branch_name)
+          msg = "Modifying environment '#{branch_name}'."
         end
+        msg
       end
 
       def isBranch(refType)

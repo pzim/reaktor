@@ -1,9 +1,9 @@
 require 'resque'
-require 'event_jobs'
-require 'gitaction'
+require 'reaktor/event_jobs'
+require 'reaktor/gitaction'
 require 'logger'
 # needed temporarily to test
-require 'notification/notifier'
+require 'reaktor/notification/notifier'
 
 module Reaktor
   module Jobs

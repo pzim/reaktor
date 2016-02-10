@@ -1,17 +1,15 @@
-$LOAD_PATH.unshift ::File.expand_path(::File.dirname(__FILE__) + '/lib/reaktor')
-
 ENV['RACK_ENV'] ||= 'production'
 
-rack_root = ENV['RACK_ROOT'] || '/data/apps/sinatra/reaktor'
-reaktor_log = ENV['REAKTOR_LOG'] || "#{rack_root}/reaktor.log"
+rack_root = ENV['RACK_ROOT'] || './'
+reaktor_log = ENV['REAKTOR_LOG'] || "#{rack_root}/log/reaktor.log"
 
 require 'sinatra'
 require 'resque/server'
 require 'logger'
-require 'r10k_app'
+require 'reaktor/server'
 
 LOGGER = Logger.new(reaktor_log.to_s)
 
 run Rack::URLMap.new \
-  '/'         => Reaktor::R10KApp.new,
+  '/'         => Reaktor::Server.new,
   '/resque'   => Resque::Server.new

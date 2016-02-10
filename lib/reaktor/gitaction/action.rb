@@ -1,7 +1,7 @@
 require 'logger'
-require 'r10k'
-require 'git'
-require 'notification/notifier'
+require 'reaktor/r10k'
+require 'reaktor/git'
+require 'reaktor/notification/notifier'
 
 module Reaktor
   module GitAction

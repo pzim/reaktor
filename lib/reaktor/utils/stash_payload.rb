@@ -1,5 +1,5 @@
 require 'logger'
-require 'utils/payload_base'
+require 'reaktor/utils/payload_base'
 
 module Reaktor
   module Utils
@@ -17,10 +17,10 @@ module Reaktor
       end
 
       def parse_json(payload)
-        @repo_name = payload['repository']['name']
-        repo_ref = payload['refChanges'][0]['refId']
-        @created = created?(payload['refChanges'][0]['fromHash'])
-        @deleted = deleted?(payload['refChanges'][0]['toHash'])
+        @repo_name = payload.fetch('repository').fetch('name')
+        repo_ref = payload.fetch('refChanges')[0].fetch('refId')
+        @created = created?(payload.fetch('refChanges')[0].fetch('fromHash'))
+        @deleted = deleted?(payload.fetch('refChanges')[0].fetch('toHash'))
         ref_array = repo_ref.split('/')
         @ref_type = ref_array[1]
         @branch_name = ref_array[2]

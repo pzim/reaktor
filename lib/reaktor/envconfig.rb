@@ -21,8 +21,8 @@ module Reaktor
     def self.init_logging(rack_env)
       STDOUT.sync = true
       STDERR.sync = true
-      rack_root = ENV['RACK_ROOT'] || '/data/apps/sinatra/reaktor'
-      reaktor_log = ENV['REAKTOR_LOG'] || "#{rack_root}/reaktor.log"
+      rack_root = ENV['RACK_ROOT'] || './'
+      reaktor_log = ENV['REAKTOR_LOG'] || "#{rack_root}/log/reaktor.log"
 
       logger = Logger.new(reaktor_log.to_s, Logger::DEBUG)
       logger.debug('in envconfig')
@@ -46,8 +46,8 @@ module Reaktor
     # @param rack_env [String] The rack environment, [development, test, production]
     def self.init_workers(rack_env)
       # Better to use the resque_workers.god script to manage the workers
-      rack_root = ENV['RACK_ROOT'] || '/data/apps/sinatra/reaktor'
-      reaktor_log = ENV['REAKTOR_LOG'] || "#{rack_root}/reaktor.log"
+      rack_root = ENV['RACK_ROOT'] || './'
+      reaktor_log = ENV['REAKTOR_LOG'] || "#{rack_root}/log/reaktor.log"
       case rack_env
 
       when 'development', 'test', 'production'

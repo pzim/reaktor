@@ -1,4 +1,4 @@
-require 'commandrunner'
+require 'reaktor/commandrunner'
 
 module Reaktor
   module R10K

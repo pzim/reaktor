@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'r10k/puppetfile'
+require 'reaktor/r10k/puppetfile'
 require 'fileutils'
 require 'tmpdir'
 

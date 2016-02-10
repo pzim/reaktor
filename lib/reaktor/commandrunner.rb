@@ -1,6 +1,6 @@
 require 'logger'
 require 'open3'
-require 'notification/notifier'
+require 'reaktor/notification/notifier'
 
 module Reaktor
   #  class CommandRunner

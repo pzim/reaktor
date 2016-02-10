@@ -1,5 +1,5 @@
 require 'logger'
-require 'utils/payload_base'
+require 'reaktor/utils/payload_base'
 
 module Reaktor
   module Utils
@@ -17,8 +17,8 @@ module Reaktor
       end
 
       def parse_json(payload)
-        @repo_name = payload['repository']['name']
-        repo_ref = payload['ref']
+        @repo_name = payload.fetch('repository').fetch('name')
+        repo_ref = payload.fetch('ref')
         @created = created?(payload['before'])
         @deleted = deleted?(payload['after'])
         ref_array = repo_ref.split('/')
