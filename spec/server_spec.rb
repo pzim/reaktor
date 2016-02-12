@@ -2,11 +2,7 @@ require 'spec_helper'
 
 require 'reaktor/event_jobs'
 
-RSpec.describe Reaktor::Server do
-  def app
-    Reaktor::Server
-  end
-
+describe Reaktor::Server do
   describe 'GET /' do
     it 'returns the index page' do
       get '/'
@@ -15,8 +11,8 @@ RSpec.describe Reaktor::Server do
   end
 
   describe 'Given the url /github_payload' do
-    context 'recieves a POST without a payload' do
-      it 'should return status:400' do
+    context 'when it recieves a POST without a payload' do
+      it 'then it should return status:400' do
         post '/github_payload'
         expect(last_response).to be_bad_request
         expect(last_response.body).to include('Missing payload')

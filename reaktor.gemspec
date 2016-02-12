@@ -55,7 +55,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "capistrano", "2.15.5"
   spec.add_dependency "hipchat-api", "1.0.6"
 
-  spec.add_development_dependency "bundler"
+  spec.add_development_dependency "bundler", '~> 1.11'
   spec.add_development_dependency "codeclimate-test-reporter"
   spec.add_development_dependency "coveralls"
   spec.add_development_dependency "guard-rake"

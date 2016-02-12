@@ -17,7 +17,7 @@ module Reaktor
         @deleted = @git_payload.deleted
 
         if @created && isBranch(ref_type)
-          logger.info('Create Event')
+          logger.info('GitLab Create Event')
           enqueue_event(CreateEvent, repo_name, branch_name)
           msg = "Creating environment '#{branch_name}'."
         end
