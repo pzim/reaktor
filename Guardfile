@@ -14,8 +14,9 @@
 #  $ ln -s config/Guardfile .
 #
 # and, you'll have to watch "config/Guardfile" instead of "Guardfile"
+notification :off
 
-guard 'rake', :task => 'test' do
+guard 'rake', task: 'test' do
   watch(%r{^lib/.+$})
   watch(%r{^spec/.+$})
 end

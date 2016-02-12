@@ -1,4 +1,4 @@
-#require 'commandrunner'
+# require 'commandrunner'
 
 module Reaktor
   module R10K
@@ -29,7 +29,7 @@ module Reaktor
       def get_module_name(repo_name)
         pfile = loadFile
         regex = /mod ["'](\w*)["'],\s*$\n^(\s*):git\s*=>\s*["'].*#{repo_name}.git["'],+(\s*):ref\s*=>\s*['"](\w+|\w+\.\d+\.\d+)['"]$/
-          new_contents = pfile.match(regex)
+        new_contents = pfile.match(regex)
         if new_contents
           module_name = new_contents[1]
         else
@@ -38,7 +38,6 @@ module Reaktor
         module_name
       end
 
-
       # update the module ref in Puppetfile
       #
       # @param module_name - The module to change the ref for
@@ -46,18 +45,18 @@ module Reaktor
       def update_module_ref(module_name, branchname)
         pfile = loadFile
         regex = /(#{module_name}(\.git)+['"],)+(\s*):ref\s*=>\s*['"](\w+|\w+\.\d+\.\d+)['"]/m
-        pfile.gsub!(regex, """\\1\\3:ref => '#{branchname}'""".strip)
+        pfile.gsub!(regex, ''"\\1\\3:ref => '#{branchname}'"''.strip)
       end
 
       def write_new_puppetfile(contents)
         if contents
-          puppetfile = File.open("#{@git_work_dir}/Puppetfile", "w")
+          puppetfile = File.open("#{@git_work_dir}/Puppetfile", 'w')
           puppetfile.write(contents)
-          puppetfile.close()
+          puppetfile.close
           p_file_after_write = `cat #{@git_work_dir}/Puppetfile`
           logger.info("modified puppetfile: #{p_file_after_write}")
         else
-          logger.info("Wont create empty Puppetfile")
+          logger.info('Wont create empty Puppetfile')
         end
       end
     end

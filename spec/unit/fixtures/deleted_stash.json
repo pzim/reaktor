@@ -17,7 +17,7 @@
     "repository": {
         "forkable": true,
         "id": 14,
-        "name": "hooktest",
+        "name": "webhook_test_two",
         "project": {
             "description": "Repositories for Puppet",
             "id": 21,
@@ -28,7 +28,7 @@
         },
         "public": false,
         "scmId": "git",
-        "slug": "hooktest",
+        "slug": "webhook_test_two",
         "state": "AVAILABLE",
         "statusMessage": "Available"
     }

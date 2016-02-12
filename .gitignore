@@ -2,3 +2,6 @@ fission.iws
 .idea
 Gemfile.lock
 coverage/
+pkg/
+tmp/
+.ruby-version

@@ -7,11 +7,11 @@ module Reaktor
       @logger ||= Logger.new(STDOUT, Logger::INFO)
 
       def self.perform(module_name, branch_name)
-        @options = { :module_name => module_name,
-                     :branch_name => branch_name,
-                     :logger => @logger
+        @options = { module_name: module_name,
+                     branch_name: branch_name,
+                     logger: @logger
         }
-        Redis::Lock.new(branch_name, :expiration => 60).lock do
+        Redis::Lock.new(branch_name, expiration: 60).lock do
           # do your stuff here ...
           action = Reaktor::GitAction::ModifyAction.new(@options)
           action.setup
@@ -22,6 +22,3 @@ module Reaktor
     end
   end
 end
-
-
-

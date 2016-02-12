@@ -1,19 +1,18 @@
 require 'resque'
-require 'event_jobs'
-require 'gitaction'
+require 'reaktor/event_jobs'
+require 'reaktor/gitaction'
 require 'logger'
-#needed temporarily to test
-require 'notification/notifier'
+# needed temporarily to test
+require 'reaktor/notification/notifier'
 
 module Reaktor
   module Jobs
     class Controller
-
       attr_reader :created, :deleted, :json
 
       def initialize(json, logger)
         @json = json
-        @logger ||= Logger.new(STDOUT, Logger::INFO)
+        @logger = logger || Logger.new(STDOUT, Logger::INFO)
       end
 
       ##
@@ -24,9 +23,6 @@ module Reaktor
       def enqueue_event(event_class, repo_name, branch_name)
         Resque.enqueue(event_class, repo_name, branch_name)
       end
-
     end
   end
 end
-
-

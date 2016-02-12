@@ -17,12 +17,12 @@
                             "executable": false,
                             "link": {
                                 "rel": "self",
-                                "url": "/projects/PUP/repos/hooktest/commits/30f6aabc3f5024aadce4f301287fa4f6d84f185d#README.md"
+                                "url": "/projects/PUP/repos/webhook_test_two/commits/30f6aabc3f5024aadce4f301287fa4f6d84f185d#README.md"
                             },
                             "links": {
                                 "self": [
                                     {
-                                        "href": "https://lxstshd0001/projects/PUP/repos/hooktest/commits/30f6aabc3f5024aadce4f301287fa4f6d84f185d#README.md"
+                                        "href": "https://lxstshd0001/projects/PUP/repos/webhook_test_two/commits/30f6aabc3f5024aadce4f301287fa4f6d84f185d#README.md"
                                     }
                                 ]
                             },
@@ -48,12 +48,12 @@
                 },
                 "link": {
                     "rel": "self",
-                    "url": "/projects/PUP/repos/hooktest/commits/30f6aabc3f5024aadce4f301287fa4f6d84f185d#README.md"
+                    "url": "/projects/PUP/repos/webhook_test_two/commits/30f6aabc3f5024aadce4f301287fa4f6d84f185d#README.md"
                 },
                 "links": {
                     "self": [
                         {
-                            "href": "https://lxstshd0001/projects/PUP/repos/hooktest/commits/30f6aabc3f5024aadce4f301287fa4f6d84f185d#README.md"
+                            "href": "https://lxstshd0001/projects/PUP/repos/webhook_test_two/commits/30f6aabc3f5024aadce4f301287fa4f6d84f185d#README.md"
                         }
                     ]
                 },
@@ -87,7 +87,7 @@
     "repository": {
         "forkable": true,
         "id": 14,
-        "name": "hooktest",
+        "name": "webhook_test_two",
         "project": {
             "description": "Repositories for Puppet",
             "id": 21,
@@ -98,7 +98,7 @@
         },
         "public": false,
         "scmId": "git",
-        "slug": "hooktest",
+        "slug": "webhook_test_two",
         "state": "AVAILABLE",
         "statusMessage": "Available"
     }

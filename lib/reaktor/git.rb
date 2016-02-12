@@ -1,7 +1,6 @@
 module Reaktor
   module Git
-    require 'git/repo'
-    require 'git/workdir'
+    require 'reaktor/git/repo'
+    require 'reaktor/git/workdir'
   end
 end
-

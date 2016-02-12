@@ -1,11 +1,9 @@
 ---
-address: localhost
+bind: localhost
 port: 4570
 servers: 1
 max_conns: 1024
 max_persistent_conns: 512
 timeout: 30
-environment: production
 pid: tmp/pids/reaktor.pid
-log: log/reaktor.log
-daemonize: true
+logdir: log
