@@ -1,7 +1,7 @@
 require 'logger'
 
 module Notifiers
-  class LogNotifier
+  class Lognotifier
     include Singleton
     include Observable
 

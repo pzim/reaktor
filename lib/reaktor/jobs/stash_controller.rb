@@ -22,7 +22,7 @@ module Reaktor
         # Notification::Notifier.instance.notification = "branch_name = #{branch_name}"
 
         if @created && isBranch(ref_type)
-          logger.info('Create Event')
+          logger.info('Stash Create Event')
           enqueue_event(CreateEvent, repo_name, branch_name)
           msg = "Creating environment '#{branch_name}'."
         end

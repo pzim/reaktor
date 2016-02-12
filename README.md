@@ -1,11 +1,7 @@
 # Reaktor
 
-[![Build Status](https://travis-ci.org/timhughes/reaktor.svg?branch=master)](https://travis-ci.org/timhughes/reaktor)
-[![Coverage Status](https://coveralls.io/repos/timhughes/reaktor/badge.svg?branch=master&service=github)](https://coveralls.io/github/timhughes/reaktor?branch=master)
-
-[![Code Climate](https://codeclimate.com/github/timhughes/reaktor/badges/gpa.svg)](https://codeclimate.com/github/timhughes/reaktor)
-[![Test Coverage](https://codeclimate.com/github/timhughes/reaktor/badges/coverage.svg)](https://codeclimate.com/github/timhughes/reaktor/coverage)
-[![Issue Count](https://codeclimate.com/github/timhughes/reaktor/badges/issue_count.svg)](https://codeclimate.com/github/timhughes/reaktor)
+[![Build Status](https://travis-ci.org/pzim/reaktor.svg?branch=master)](https://travis-ci.org/pzim/reaktor)
+[![Coverage Status](https://coveralls.io/repos/github/pzim/reaktor/badge.svg?branch=master)](https://coveralls.io/github/pzim/reaktor?branch=master)
 
 
 ## Description

@@ -10,9 +10,9 @@ module Reaktor
     class Controller
       attr_reader :created, :deleted, :json
 
-      def initialize(json, _logger)
+      def initialize(json, logger)
         @json = json
-        @logger ||= Logger.new(STDOUT, Logger::INFO)
+        @logger = logger || Logger.new(STDOUT, Logger::INFO)
       end
 
       ##
