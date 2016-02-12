@@ -65,5 +65,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rspec"
   spec.add_development_dependency "rubocop"
   spec.add_development_dependency "resque_spec"
+  spec.add_development_dependency "foreman-export-initscript"
 end
 
