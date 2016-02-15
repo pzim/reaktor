@@ -1,24 +1,21 @@
-require 'git'
+require 'reaktor/git'
 
 class Reaktor::Git::WorkDir < Reaktor::Git::Repo
-
-  #include Reaktor::Logging
+  # include Reaktor::Logging
 
   # @param path       [String]
   # @param url        [String]
   def initialize(path, url)
-
     @path = path
     @url  = url
-    @git_dir   = File.join(@path, '.git')
+    @git_dir = File.join(@path, '.git')
     @logger ||= Logger.new(STDOUT, Logger::INFO)
-
   end
 
   # clone the repo represented by @url at @path
   def clone
-    if not dir_exist?
-      git ["clone", @url, @path]
+    unless dir_exist?
+      git ['clone', @url, @path]
       fetch
     end
   end
@@ -28,14 +25,14 @@ class Reaktor::Git::WorkDir < Reaktor::Git::Repo
   # @param branchname - The git branch to check out
   def checkout(branchname)
     fetch
-    if not branch_exist?(branchname)
+    if !branch_exist?(branchname)
       @logger.info("branch #{branchname} doesn't exist. Create it now...")
-      git ["checkout", "-b", branchname], :path => @path
+      git ['checkout', '-b', branchname], path: @path
     else
       @logger.info("branch #{branchname} exists. Check it out now...")
-      git ["checkout", "--force", branchname], :path => @path
-      git ["pull", "origin", branchname], :path => @path
-      git ["merge", "origin/production", "-X ours", "--no-edit"], :path => @path
+      git ['checkout', '--force', branchname], path: @path
+      git ['pull', 'origin', branchname], path: @path
+      git ['merge', 'origin/production', '-X ours', '--no-edit'], path: @path
     end
   end
 
@@ -43,7 +40,7 @@ class Reaktor::Git::WorkDir < Reaktor::Git::Repo
   #
   # @param branchname - The git branch to delete
   def deleteBranch(branchname)
-    git ["push", "origin", ":#{branchname}"], :path => @path
+    git ['push', 'origin', ":#{branchname}"], path: @path
   end
 
   # push changes in working dir to remote
@@ -52,20 +49,21 @@ class Reaktor::Git::WorkDir < Reaktor::Git::Repo
   # @param commit_msg - The git commit message for this push
   def push(branchname, commit_msg)
     commit commit_msg
-    pushed = git ["push", "origin", branchname], :path => @path
+    pushed = git ['push', 'origin', branchname], path: @path
     if pushed.exitstatus == 0
       true
     else
       false
     end
   end
+
   # commit the current changes for this working dir
   def commit(commit_msg)
-    #result = git ["commit", "-a", "-m", "\"#{commit_msg}\""], :path => @path 
-    git ["commit", "-a", "-m", "\"#{commit_msg}\""], :path => @path 
+    # result = git ["commit", "-a", "-m", "\"#{commit_msg}\""], :path => @path
+    git ['commit', '-a', '-m', "\"#{commit_msg}\""], path: @path
   end
-  
-  # Does a branch exist on the remote? 
+
+  # Does a branch exist on the remote?
   # @return [true, false]
   def branch_exist?(branchname)
     git_remote_branch_cmd = "git ls-remote --heads #{@url} | cut -d '/' -f3"
@@ -90,6 +88,4 @@ class Reaktor::Git::WorkDir < Reaktor::Git::Repo
   def dir_exist?
     File.directory? @path
   end
-
 end
-

@@ -16,16 +16,16 @@ module Notifiers
       @room_id     = env['REAKTOR_HIPCHAT_ROOM']
       @from        = env['REAKTOR_HIPCHAT_FROM']
       hipchat_url  = env['REAKTOR_HIPCHAT_URL']
-      if hipchat_url.nil? or hipchat_url.empty?
-        @hipchat = HipChat::API.new(token)
-      else
-        @hipchat = HipChat::API.new(token, hipchat_url)
-      end
+      @hipchat = if hipchat_url.nil? || hipchat_url.empty?
+                   HipChat::API.new(token)
+                 else
+                   HipChat::API.new(token, hipchat_url)
+                 end
       @logger.info("token = #{token}")
       # ensure room_id exists
-      if not room_exist? @room_id
+      unless room_exist? @room_id
         @logger.info("The defined room_id: #{@room_id} does not exist.")
-        @logger.info("Hipchat messages cannot be sent until a valid room is defined.")
+        @logger.info('Hipchat messages cannot be sent until a valid room is defined.')
       end
     end
 
@@ -35,11 +35,9 @@ module Notifiers
       # Hipchat has message max length of 10K chars. If message size is
       # greater than 10K, need to get out the machete. Using last 5K
       # chars of message in this instance
-      if message.length > 10000
-        message = message.split(//).last(5000).join("")
-      end
+      message = message.split(//).last(5000).join('') if message.length > 10_000
       @notification = message
-        @hipchat.rooms_message(@room_id,
+      @hipchat.rooms_message(@room_id,
                              @from,
                              @notification,
                              notify = 0,
@@ -49,10 +47,13 @@ module Notifiers
 
     def room_exist?(room_name)
       rooms = @hipchat.rooms_list
+      if rooms['error'] && rooms['error']['code'] !~ /^2\d+/
+        @logger.error "#{rooms['error']['code']} - #{rooms['error']['message']}"
+        false
+      end
       room = rooms['rooms'].select { |x| x['name'] == room_name }
       @logger.info("room = #{room}")
       room.empty? ? false : true
     end
-
   end
 end

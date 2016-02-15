@@ -1,12 +1,10 @@
-require 'event_jobs'
-require 'gitaction'
 require 'logger'
-require 'event_jobs'
+require 'reaktor/event_jobs'
+require 'reaktor/gitaction'
 
 module Reaktor
   module Jobs
     class GitHubController < Controller
-
       ##
       # process the event - enqueue and let the relevant action class
       # do the processing
@@ -20,31 +18,32 @@ module Reaktor
         @created = @git_payload.created
         @deleted = @git_payload.deleted
 
-        #temp for testing
-        #Notification::Notifier.instance.notification = "branch_name = #{branch_name}"
-        
+        # temp for testing
+        # Notification::Notifier.instance.notification = "branch_name = #{branch_name}"
+
         if @created && isBranch(ref_type)
-          logger.info("Create Event")
+          logger.info('GitHub Create Event')
           enqueue_event(CreateEvent, repo_name, branch_name)
+          msg = "Creating environment '#{branch_name}'."
         end
 
         if @deleted && isBranch(ref_type)
-          logger.info("Delete Event")
+          logger.info('Delete Event')
           enqueue_event(DeleteEvent, repo_name, branch_name)
+          msg = "Deleting environment '#{branch_name}'."
         end
 
         if !@created && !@deleted
-          logger.info("Modify Event")
+          logger.info('Modify Event')
           enqueue_event(ModifyEvent, repo_name, branch_name)
+          msg = "Modifying environment '#{branch_name}'."
         end
-
+        msg
       end
 
       def isBranch(refType)
-        return refType == "heads"
+        refType == 'heads'
       end
     end
   end
 end
-
-

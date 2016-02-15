@@ -1,0 +1,9 @@
+---
+bind: localhost
+port: 4570
+servers: 1
+max_conns: 1024
+max_persistent_conns: 512
+timeout: 30
+pid: tmp/pids/reaktor.pid
+logdir: log
