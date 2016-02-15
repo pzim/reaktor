@@ -3,4 +3,7 @@ inherit_from: .rubocop_todo.yml
 AllCops:
   Exclude:
     - 'reaktor.gemspec'
+    - 'Vagrantfile'
+    - 'bundle/**/*'
+    - 'bin/**/*'
 

@@ -32,7 +32,7 @@ module Reaktor
       case rack_env
       when 'development', 'test'
         Resque.logger.level = Logger::DEBUG
-          logger.info("DEV/TEST: setting logger level to DEBUG")
+        logger.info("DEV/TEST: setting logger level to DEBUG")
       when 'production'
         Resque.logger.level = Logger::INFO
         logger.info('PRODUCTION: setting logger level to INFO')
@@ -52,8 +52,8 @@ module Reaktor
 
       when 'development', 'test', 'production'
         system("TERM_CHILD=1 QUEUE=resque_create rake resque:work >> #{reaktor_log} &")
-          system("TERM_CHILD=1 QUEUE=resque_modify rake resque:work >> #{reaktor_log} &")
-          system("TERM_CHILD=1 QUEUE=resque_delete rake resque:work >> #{reaktor_log} &")
+        system("TERM_CHILD=1 QUEUE=resque_modify rake resque:work >> #{reaktor_log} &")
+        system("TERM_CHILD=1 QUEUE=resque_delete rake resque:work >> #{reaktor_log} &")
 
       else
         raise ArgumentError, "Cannot init resque workers: unknown RACK_ENV #{rack_env}"

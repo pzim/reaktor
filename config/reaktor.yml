@@ -1,9 +1,25 @@
 ---
-bind: localhost
-port: 4570
-servers: 1
-max_conns: 1024
-max_persistent_conns: 512
-timeout: 30
-pid: tmp/pids/reaktor.pid
-logdir: log
+development:
+  #  bind: 0.0.0.0
+  # port: 4570
+  pid: './tmp/pids/reaktor.pid'
+  logdir: './log'
+  notifiers_dir: './lib/reaktor/notification/active_notifiers'
+  puppetfile_git_url: 'https://example.com/someuser/somerepo.git'
+
+test:
+  #  bind: 0.0.0.0
+  # port: 4570
+  pid: './tmp/pids/reaktor.pid'
+  logdir: './log'
+  notifiers_dir: './lib/reaktor/notification/active_notifiers'
+  puppetfile_git_url: 'https://example.com/someuser/somerepo.git'
+
+production:
+  # bind: 0.0.0.0
+  # port: 4570
+  pid: '/var/run/reaktor/reaktor.pid'
+  logdir: '/var/log/reaktor'
+  notifiers_dir: './lib/reaktor/notification/active_notifiers'
+  puppetfile_git_url: 'https://example.com/someuser/somerepo.git'
+

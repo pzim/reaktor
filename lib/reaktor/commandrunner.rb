@@ -35,27 +35,27 @@ module Reaktor
     end
 
     # read each line from capistrano stream and html format the newlines, then send notification
-    def read_cap_stream(stream, action)
-      @msg = ''
-      begin
-        while line = stream.gets
-          @logger.debug("line: #{line}")
-          if action.eql? 'update_environment'
-            if line.include?('WARN') || line.include?('Sync') || line.include?('failed') || line.include?('finished')
-              @msg << "#{line}<br>"
-            end
-          else # action = deploy_module
-            if line.include?('Sync') || line.include?('failed') || line.include?('finished')
-              @msg << "#{line}<br>"
-            end
-          end
-        end
-      rescue Exception
-        @msg << "Something went wrong with cap #{action}: {$ERROR_INFO}"
-      end
+    # def read_cap_stream(stream, action)
+    # @msg = ''
+    # begin
+    # while line = stream.gets
+    # @logger.debug("line: #{line}")
+    # if action.eql? 'update_environment'
+    # if line.include?('WARN') || line.include?('Sync') || line.include?('failed') || line.include?('finished')
+    # @msg << "#{line}<br>"
+    # end
+    # else # action = deploy_module
+    # if line.include?('Sync') || line.include?('failed') || line.include?('finished')
+    # @msg << "#{line}<br>"
+    # end
+    # end
+    # end
+    # rescue Exception
+    # @msg << "Something went wrong with cap #{action}: {$ERROR_INFO}"
+    # end
 
-      Notification::Notifier.instance.notification = @msg
-    end
+    # Notification::Notifier.instance.notification = @msg
+    # end
 
     # takes an array consisting of main command and options
     def execute(command)
@@ -80,23 +80,23 @@ module Reaktor
     end
 
     # takes an array consisting of main capistrano command and options
-    def execute_cap(command)
-      # cap update_environment -s branchname=dev_RSN_592
-      @logger ||= Logger.new(STDOUT, Logger::INFO)
-      @action = command[1] # either deploy_module or update_environment
-      cmd = command.join(' ')
-      @logger.info("cmdRunner.cmd = #{cmd}")
-      @logger.info("cmdRunner action = #{@action}")
-      @exit_status = nil
-      Open3.popen3(cmd) do |_stdin, _stdout, stderr, thr|
-        t1 = Thread.new { read_cap_stream(stderr, @action) }
-        t1.join
-        @cap_exit = thr.value
-        @logger.info("cmdRunner.cap_exit = #{@cap_exit}")
-        @logger.info("cmdRunner.cap_exit_status = #{@cap_exit.exitstatus}")
-        # @logger.info("msg = #{@msg}")
-      end
-      @cap_exit
-    end
+    # def execute_cap(command)
+    #  cap update_environment -s branchname=dev_RSN_592
+    # @logger ||= Logger.new(STDOUT, Logger::INFO)
+    # @action = command[1] # either deploy_module or update_environment
+    # cmd = command.join(' ')
+    # @logger.info("cmdRunner.cmd = #{cmd}")
+    # @logger.info("cmdRunner action = #{@action}")
+    # @exit_status = nil
+    # Open3.popen3(cmd) do |_stdin, _stdout, stderr, thr|
+    # t1 = Thread.new { read_cap_stream(stderr, @action) }
+    # t1.join
+    # @cap_exit = thr.value
+    # @logger.info("cmdRunner.cap_exit = #{@cap_exit}")
+    # @logger.info("cmdRunner.cap_exit_status = #{@cap_exit.exitstatus}")
+    #    @logger.info("msg = #{@msg}")
+    # end
+    # @cap_exit
+    # end
   end
 end

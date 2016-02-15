@@ -12,10 +12,10 @@ module Reaktor
                      logger: @logger
         }
         Redis::Lock.new(branch_name, expiration: 60).lock do
-          # do your stuff here ...
+          # do  your stuff here ...
           action = Reaktor::GitAction::ModifyAction.new(@options)
           action.setup
-          action.updatePuppetfile
+          action.update_puppet_file
           action.cleanup
         end
       end

@@ -17,7 +17,7 @@ describe Reaktor::R10K::Puppetfile do
 
   let(:now) { Time.now.strftime('%Y%m%d%H%M%S%L') }
   # let(:puppetfile_orig) { File.new(read_fixture("Puppetfile")) }
-  let(:puppetfile_orig) { File.new('spec/unit/fixtures/Puppetfile') }
+  # let(:puppetfile_orig) { File.new('spec/unit/fixtures/Puppetfile') }
   let(:git_work_dir) { Dir.mktmpdir('rspec') }
 
   before(:each) do

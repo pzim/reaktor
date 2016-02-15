@@ -1,8 +1,8 @@
 # web app libraries
-require 'json'
+
+# require 'em/pure_ruby'
 require 'sinatra/base'
 require 'sinatra/config_file'
-
 require 'reaktor/gitaction'
 require 'reaktor/event_jobs'
 require 'reaktor/r10k'
@@ -10,13 +10,27 @@ require 'reaktor/r10k'
 module Reaktor
   class Server < Sinatra::Base
     set :root,  ENV['RACK_ROOT'] || File.expand_path('.')
-    konfig_file = ENV['REAKTOR_CONF'] || File.join(root, 'config', 'reaktor.yml')
 
+    # TODO: note
+    # try load from ./config/reaktor.yml
+    # load config from /etc/reaktor/reaktor.yml
+    # or rely only on env vars
+
+    konfig_file = ENV['REAKTOR_CONF'] || File.join(root, 'config', 'reaktor.yml')
+    logger ||= Logger.new(STDOUT, Logger::INFO)
+    logger.info("Loading config from: #{konfig_file}")
     # set :show_exceptions, :after_handler
 
     register Sinatra::ConfigFile
     config_file konfig_file
-    logger ||= Logger.new(File.join(settings.logdir.to_s, "reaktor_#{environment}.log"), Logger::INFO)
+
+    logger = Logger.new(File.join(settings.logdir.to_s, "reaktor_#{environment}.log"), Logger::INFO)
+
+    # configure do
+    #  enable :logging
+    #  Global.config_directory = File.join(root, 'config').to_s
+    #  Global.environment = settings.environment
+    # end
 
     get '/' do
       if settings.development?
@@ -29,10 +43,11 @@ module Reaktor
             </head>
             <body>
               <h3>Reaktor</h3>
-              <p>a< href=\"https://github.com/pzim/reaktor\"> Docs</a></p>
+              <p><a href=\"https://github.com/pzim/reaktor\" target=\"_blank\"> Docs</a></p>
               <dl>
               <dt>Environment</dt><dd>#{settings.environment}</dd>
               <dt>Root</dt><dd>#{settings.root}</dd>
+              <h1>#{settings}</h1>
               </dl>
             </body>
         </html>

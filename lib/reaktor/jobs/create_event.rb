@@ -1,6 +1,3 @@
-require 'reaktor/gitaction/create_action'
-require 'logger'
-
 module Reaktor
   module Jobs
     class CreateEvent
@@ -18,7 +15,7 @@ module Reaktor
           # do your stuff here ...
           action = Reaktor::GitAction::CreateAction.new(@options)
           action.setup
-          action.updatePuppetFile
+          action.update_puppet_file
           action.cleanup
         end
       end

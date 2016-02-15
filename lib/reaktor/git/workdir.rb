@@ -15,7 +15,7 @@ class Reaktor::Git::WorkDir < Reaktor::Git::Repo
   # clone the repo represented by @url at @path
   def clone
     unless dir_exist?
-      git ['clone', @url, @path]
+      git ['clone', '--branch production', @url, @path]
       fetch
     end
   end
@@ -30,8 +30,10 @@ class Reaktor::Git::WorkDir < Reaktor::Git::Repo
       git ['checkout', '-b', branchname], path: @path
     else
       @logger.info("branch #{branchname} exists. Check it out now...")
+      git ['fetch', 'origin', branchname], path: @path
       git ['checkout', '--force', branchname], path: @path
-      git ['pull', 'origin', branchname], path: @path
+      # TODO: http://shorts.jeffkreeftmeijer.com/2014/compare-version-numbers-with-pessimistic-constraints/
+      # --no-edit doesnt work in git 1.7.1 (RHEL)
       git ['merge', 'origin/production', '-X ours', '--no-edit'], path: @path
     end
   end
@@ -39,7 +41,7 @@ class Reaktor::Git::WorkDir < Reaktor::Git::Repo
   # delete the given branch
   #
   # @param branchname - The git branch to delete
-  def deleteBranch(branchname)
+  def delete_branch(branchname)
     git ['push', 'origin', ":#{branchname}"], path: @path
   end
 

@@ -32,7 +32,8 @@ class Reaktor::Git::Repo
   def git(cmd, opts = {})
     # raise_on_fail = opts.fetch(:raise_on_fail, true)
 
-    argv = %w(git)
+    argv = %w(git )
+    argv << ENV['REAKTOR_GIT_OPTIONS']
 
     if opts[:path]
       argv << '--git-dir'   << File.join(opts[:path], '.git')

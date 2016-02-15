@@ -9,13 +9,14 @@ module Reaktor
       end
 
       def setup
-        logger.info("branch = #{branch_name}")
+        # logger.info("branch = #{branch_name}")
         @puppetfile_dir.clone
       end
 
-      def deletePuppetfileBranch
+      def delete_puppetfile_branch
+        # TODO: This should deploy the environemnt removal
         Notification::Notifier.instance.notification = "Deleting #{branch_name} from puppetfile repo"
-        @puppetfile_dir.deleteBranch(branch_name)
+        @puppetfile_dir.delete_branch(branch_name)
       end
 
       def cleanup

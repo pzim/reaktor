@@ -3,7 +3,7 @@
 module Reaktor
   module R10K
     class Puppetfile
-      GIT_URL = ENV['PUPPETFILE_GIT_URL']
+      GIT_URL = ENV['PUPPETFILE_GIT_URL'] # || Sinatra::Base.settings.puppetfile_git_url
       attr_accessor :branch, :mod, :git_url, :logger, :git_work_dir, :git_update_ref_msg
 
       def initialize(branch, mod, logger)
@@ -17,6 +17,7 @@ module Reaktor
         @git_dir = "#{@git_work_dir}/.git"
         @git_cmd = "git --git-dir=#{@git_dir} --work-tree=#{@git_work_dir}"
         @git_update_ref_msg = "changing :ref for #{mod} to #{branch}"
+        raise 'PUPPETFILE_GIT_URL not set' unless @git_url
       end
 
       def loadFile
@@ -28,7 +29,8 @@ module Reaktor
       # @param repo_name - The repo name assiociated with the module
       def get_module_name(repo_name)
         pfile = loadFile
-        regex = /mod ["'](\w*)["'],\s*$\n^(\s*):git\s*=>\s*["'].*#{repo_name}.git["'],+(\s*):ref\s*=>\s*['"](\w+|\w+\.\d+\.\d+)['"]$/
+        #regex = /mod ["'](\w*)["'],\s*$\n^(\s*):git\s*=>\s*["'].*#{repo_name}.git["'],+(\s*):ref\s*=>\s*['"](\w+|\w+\.\d+\.\d+)['"]$/
+        regex = /mod ["'](\w*)["'],\s*$\n^(\s*):git\s*=>\s*["'].*#{repo_name}.git["'],\s*$\n^(\s*):ref\s*=>\s*['"](\w+|\w+\.\d+\.\d+)['"](\s*)$/
         new_contents = pfile.match(regex)
         if new_contents
           module_name = new_contents[1]

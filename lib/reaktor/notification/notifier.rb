@@ -13,8 +13,7 @@ module Reaktor
         # if user wants to override where to look for custom notifiers
         @notifier_dir = ENV['REAKTOR_NOTIFIERS_DIR']
         # if no custom notifier dir found, use default
-        current_dir = Dir.pwd
-        @notifier_dir ||= "#{current_dir}/lib/reaktor/notification/active_notifiers"
+        @notifier_dir ||= File.join(File.expand_path(File.dirname(__FILE__)), 'active_notifiers')
         loadNotifiersAsObservers(@notifier_dir)
       end
 

@@ -1,5 +1,11 @@
 #!/usr/bin/env ruby
+
 require 'rack'
 require 'reaktor/server'
+require 'resque/server'
 
-Reaktor::Server.run
+app = Rack::URLMap.new(
+  '/' => Reaktor::Server.new,
+  '/resque' => Resque::Server.new
+)
+Rack::Server.start app: app

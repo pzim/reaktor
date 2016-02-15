@@ -2,11 +2,11 @@ require 'logger'
 require 'reaktor/r10k'
 require 'reaktor/git'
 require 'reaktor/notification/notifier'
+require 'reaktor/deployment/deployer'
 
 module Reaktor
   module GitAction
     class Action
-      include R10K::Deploy
       attr_accessor :module_name,
                     :branch_name,
                     :puppetfile,

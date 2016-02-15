@@ -1,10 +1,18 @@
 # ---- start common Rakefile  -----
-require 'bundler/gem_tasks'
-require 'rspec/core/rake_task'
-require 'rubocop/rake_task'
 
-RuboCop::RakeTask.new
-RSpec::Core::RakeTask.new
+require 'bundler/gem_tasks'
+
+begin
+  require 'rspec/core/rake_task'
+  RSpec::Core::RakeTask.new
+rescue LoadError # rubocop:disable Lint/HandleExceptions
+end
+
+begin
+  require 'rubocop/rake_task'
+  RuboCop::RakeTask.new
+rescue LoadError # rubocop:disable Lint/HandleExceptions
+end
 
 desc 'Populate CONTRIBUTORS file'
 task :contributors do
@@ -18,11 +26,14 @@ end
 
 task default: [:help]
 
-require 'jsonlint/rake_task'
-JsonLint::RakeTask.new do |t|
-  t.paths = %w(
-    spec/**/*.json
-  )
+begin
+  require 'jsonlint/rake_task'
+  JsonLint::RakeTask.new do |t|
+    t.paths = %w(
+      spec/**/*.json
+    )
+  end
+rescue LoadError # rubocop:disable Lint/HandleExceptions
 end
 
 desc 'Check syntax of ruby files'

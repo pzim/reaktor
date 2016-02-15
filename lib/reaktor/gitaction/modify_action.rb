@@ -9,19 +9,21 @@ module Reaktor
       end
 
       def setup
-        logger.info("branch = #{branch_name}")
+        # logger.info("branch = #{branch_name}")
         @puppetfile_dir.clone
         @puppetfile_dir.checkout(branch_name)
       end
 
-      def updatePuppetfile
+      def update_puppet_file
         self.module_name = @puppetfile.get_module_name(module_name)
         pfile_contents = @puppetfile.update_module_ref(module_name, branch_name)
         @puppetfile.write_new_puppetfile(pfile_contents)
-        @puppetfile_dir.push(branch_name, @puppetfile.git_update_ref_msg)
-        Notification::Notifier.instance.notification = "r10k deploy module for #{module_name} in progress..."
-        r10k_deploy_module module_name
-        Notification::Notifier.instance.notification = "r10k deploy module for #{module_name} finished"
+        pushed = @puppetfile_dir.push(branch_name, @puppetfile.git_update_ref_msg)
+        if pushed
+          Deployment::Deployer.instance.deploy(module_name: module_name)
+        else
+          Notification::Notifier.instance.notification = "#{self.class.name} Push failed!"
+        end
       end
 
       def cleanup

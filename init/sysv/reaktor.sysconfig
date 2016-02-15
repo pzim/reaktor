@@ -1,0 +1,10 @@
+export REAKTOR_LOG=/var/log/reaktor
+export REAKTOR_USER=reaktor
+export REAKTOR_GROUP=reaktor
+export REAKTOR_CONF=/etc/reaktor/reaktor.yml
+export RACK_ENV=production
+export PUPPETFILE_GIT_URL=https://example.com/somerepo.git
+# export REAKTOR_NOTIFIERS_DIR=/var/somewhere
+# export REAKTOR_DEPLOYERS_DIR=/var/somewhere
+export GIT_SSL_NO_VERIFY=true
+export EMAIL=reaktor@example.com
