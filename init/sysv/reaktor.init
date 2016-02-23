@@ -1,0 +1,79 @@
+#!/bin/bash
+#
+# Reaktor
+#
+# chkconfig: 2345 85 15
+# description: start, stop, restart reaktor
+#
+# Also consider adding this line (kills god weekly) to your crontab (sudo crontab -e):
+#
+#    # deicide is painless
+#    0 1 * * 0 god quit; sleep 1; killall god; sleep 1; killall -9 god;     sleep 1; /etc/init.d/god start
+#
+
+. /etc/rc.d/init.d/functions
+
+if [ -f /etc/sysconfig/reaktor ]; then
+    . /etc/sysconfig/reaktor
+fi
+if [ -f /opt/rh/ruby193/enable  ]; then
+    . /opt/rh/ruby193/enable
+fi
+
+
+RETVAL=0
+prog="reaktor"
+
+CONF="/etc/reaktor/reaktor.god"
+PID_FILE="/var/run/reaktor/god.pid"
+mkdir -p `dirname $PID_FILE`
+chown $REAKTOR_USER `dirname $PID_FILE`
+
+LOG_FILE="/var/log/reaktor/god.log"
+mkdir -p `dirname $LOG_FILE`
+chown $REAKTOR_USER `dirname $LOG_FILE`
+
+GOD=$(which god)
+[ $? -eq 0  ] ||  exit
+
+[ -f $CONF ] || exit
+
+start()
+{
+    echo -n $"Starting $prog: "
+    $GOD -c "$CONF" -P "$PID_FILE" -l "$LOG_FILE" && success || failure
+    RETVAL=$?
+    echo
+}
+
+stop()
+{
+    echo -n $"Stopping $prog: "
+    $GOD terminate && success || failure
+    RETVAL=$?
+    echo
+}
+
+case "$1" in
+    start)
+        start
+        ;;
+    stop)
+        stop
+        ;;
+    restart)
+        stop
+        start
+        ;;
+    status)
+        status -p $PID_FILE $prog
+        RETVAL=$?
+        ;;
+    *)
+        echo "Usage: $prog {start|stop|restart|status}"
+        exit 1
+        ;;
+esac
+
+exit $RETVAL
+# vim: set ft=sh ts=4 sw=4 tw=80 et :

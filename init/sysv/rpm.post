@@ -1,0 +1,11 @@
+id reaktor &>/dev/null || useradd --system --create-home reaktor
+
+cp init/sysv/reaktor.sysconfig /etc/sysconfig/reaktor
+cp init/sysv/reaktor.init /etc/rc.d/init.d/reaktor
+chmod +x /etc/init.d/reaktor
+
+mkdir -p /etc/reaktor
+cp god/reaktor.god /etc/reaktor/
+cp config/reaktor.yml /etc/reaktor/reaktor.yml
+
+

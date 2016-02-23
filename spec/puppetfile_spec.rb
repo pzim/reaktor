@@ -1,27 +1,27 @@
 require 'spec_helper'
-require 'r10k/puppetfile'
+require 'reaktor/r10k/puppetfile'
 require 'fileutils'
 require 'tmpdir'
 
 describe Reaktor::R10K::Puppetfile do
   let(:logger)  { double('logger').as_null_object }
-  let(:branch1) { ('reaktor_test1') }
-  let(:branch2) { ('reaktor_test2') }
-  let(:branch3) { ('reaktor_test3') }
-  let(:mod1) { ('testmod1') }
-  let(:mod2) { ('testmod2') }
-  let(:mod3) { ('testmod3') }
-  let(:repo_name1) { ('testmod1') }
-  let(:repo_name2) { ('myproject-testmod2') }
-  let(:repo_name3) { ('testmod3') }
+  let(:branch1) { 'reaktor_test1' }
+  let(:branch2) { 'reaktor_test2' }
+  let(:branch3) { 'reaktor_test3' }
+  let(:mod1) { 'testmod1' }
+  let(:mod2) { 'testmod2' }
+  let(:mod3) { 'testmod3' }
+  let(:repo_name1) { 'testmod1' }
+  let(:repo_name2) { 'myproject-testmod2' }
+  let(:repo_name3) { 'testmod3' }
 
   let(:now) { Time.now.strftime('%Y%m%d%H%M%S%L') }
-  #let(:puppetfile_orig) { File.new(read_fixture("Puppetfile")) }
-  let(:puppetfile_orig) { File.new("spec/unit/fixtures/Puppetfile") }
+  # let(:puppetfile_orig) { File.new(read_fixture("Puppetfile")) }
+  # let(:puppetfile_orig) { File.new('spec/unit/fixtures/Puppetfile') }
   let(:git_work_dir) { Dir.mktmpdir('rspec') }
 
   before(:each) do
-    FileUtils.cp("spec/unit/fixtures/Puppetfile", "#{git_work_dir}/Puppetfile")
+    FileUtils.cp('spec/unit/fixtures/Puppetfile', "#{git_work_dir}/Puppetfile")
   end
 
   after(:each) do
@@ -46,7 +46,7 @@ describe Reaktor::R10K::Puppetfile do
     subject.git_work_dir = git_work_dir
     contents = subject.update_module_ref(mod1, branch1)
     subject.write_new_puppetfile(contents)
-    expect(File.open("#{subject.git_work_dir}/Puppetfile", "r").read).to include("mod 'testmod1',")
+    expect(File.open("#{subject.git_work_dir}/Puppetfile", 'r').read).to include("mod 'testmod1',")
   end
 
   it 'should retrieve testmod2 as module name' do
@@ -65,7 +65,7 @@ describe Reaktor::R10K::Puppetfile do
     subject.git_work_dir = git_work_dir
     contents = subject.update_module_ref(mod2, branch2)
     subject.write_new_puppetfile(contents)
-    expect(File.open("#{subject.git_work_dir}/Puppetfile", "r").read).to include("mod 'testmod2',")
+    expect(File.open("#{subject.git_work_dir}/Puppetfile", 'r').read).to include("mod 'testmod2',")
   end
 
   it 'should not retrieve testmod3 without `ref` as module name' do
@@ -84,7 +84,6 @@ describe Reaktor::R10K::Puppetfile do
     subject.git_work_dir = git_work_dir
     contents = subject.update_module_ref(mod3, branch3)
     subject.write_new_puppetfile(contents)
-    expect(File.open("#{subject.git_work_dir}/Puppetfile", "r").read).to include("mod 'testmod3',")
+    expect(File.open("#{subject.git_work_dir}/Puppetfile", 'r').read).to include("mod 'testmod3',")
   end
-
 end

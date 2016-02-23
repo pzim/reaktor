@@ -1,12 +1,12 @@
 module Reaktor
   module GitAction
-    require 'gitaction/action'
-    require 'gitaction/create_action'
-    require 'gitaction/delete_action'
-    require 'gitaction/modify_action'
-    require 'gitaction/action_controller'
-    require 'utils/github_payload'
-    require 'utils/gitlab_payload'
-    require 'utils/stash_payload'
+    require 'reaktor/gitaction/action'
+    require 'reaktor/gitaction/create_action'
+    require 'reaktor/gitaction/delete_action'
+    require 'reaktor/gitaction/modify_action'
+    # require 'reaktor/gitaction/action_controller'
+    require 'reaktor/utils/github_payload'
+    require 'reaktor/utils/gitlab_payload'
+    require 'reaktor/utils/stash_payload'
   end
 end

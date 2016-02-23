@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+
+require 'rake'
+require 'logger'
+require 'resque/tasks'
+require 'reaktor/event_jobs'
+
+ENV['TERM_CHILD'] = '1'
+Resque.logger = Logger.new(STDOUT, Logger::INFO)
+Rake.application['resque:work'].invoke
+
+#  vim: set ft=ruby ts=4 sw=2 tw=0 et :

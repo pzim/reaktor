@@ -1,5 +1,5 @@
-rack_root          = ENV['RACK_ROOT'] || "/data/apps/sinatra/reaktor"
-reaktor_log        = ENV['REAKTOR_LOG'] || "#{rack_root}/reaktor.log"
+rack_root          = ENV['RACK_ROOT'] || "./"
+reaktor_log        = ENV['REAKTOR_LOG'] || "#{rack_root}/log/reaktor.log"
 hipchat_token      = ENV['REAKTOR_HIPCHAT_TOKEN']
 hipchat_room       = ENV['REAKTOR_HIPCHAT_ROOM']
 worker_user        = ENV['RESQUE_WORKER_USER'] || "jenkins"
@@ -17,7 +17,7 @@ num_create_workers.times do |num|
     w.gid      = "#{worker_group}"
     w.interval = 30.seconds
     w.start    = "rake -f #{rack_root}/Rakefile TERM_CHILD=1 QUEUE=resque_create resque:work"
-    w.log      = "#{reaktor_log}" 
+    w.log      = "#{reaktor_log}"
     # clean pid files before start if necessary
     w.behavior(:clean_pid_file)
 
@@ -72,7 +72,7 @@ num_delete_workers.times do |num|
     w.gid      = "#{worker_group}"
     w.interval = 30.seconds
     w.start    = "rake -f #{rack_root}/Rakefile TERM_CHILD=1 QUEUE=resque_delete resque:work"
-    w.log      = "#{reaktor_log}" 
+    w.log      = "#{reaktor_log}"
     # clean pid files before start if necessary
     w.behavior(:clean_pid_file)
 
@@ -126,7 +126,7 @@ num_modify_workers.times do |num|
     w.gid      = "#{worker_group}"
     w.interval = 30.seconds
     w.start    = "rake -f #{rack_root}/Rakefile TERM_CHILD=1 QUEUE=resque_modify resque:work"
-    w.log      = "#{reaktor_log}" 
+    w.log      = "#{reaktor_log}"
     # clean pid files before start if necessary
     w.behavior(:clean_pid_file)
 
