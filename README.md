@@ -41,9 +41,10 @@ The user you install and run reaktor as needs to have ssh trusts set up to the p
 That same user must also have git commit privileges to your Github or Github Enterprise puppet module and puppetfile repositories.
 
 ### Starting the post-receive hook
-** ensure redis is installed and running **
-cd reaktor
-rake start (starts the post-receive hook and the resque workers)
+
+**ensure redis is installed and running**  
+cd reaktor  
+rake start (starts the post-receive hook and the resque workers)  
 
 ```
 [jenkins@test-box-01 reaktor]$ rake start
@@ -56,17 +57,19 @@ Reaktor makes use of the following environment variables for configuration:
 
 ##### REAKTOR_PUPPET_MASTERS_FILE (required)
 
-export REAKTOR_PUPPET_MASTERS_FILE="/path/to/masters.txt"
+`export REAKTOR_PUPPET_MASTERS_FILE="/path/to/masters.txt"`
 
 Location of file containing all puppet masters. Each entry on a single line:
 
+```
 puppet-master-01
 puppet-master-02
 ...
+```
 
 ##### PUPPETFILE_GIT_URL (required)
 
-export PUPPETFILE_GIT_URL="git@github.com:_org_/puppetfile.git"
+`export PUPPETFILE_GIT_URL="git@github.com:_org_/puppetfile.git"`
 
 ##### REAKTOR_HIPCHAT_TOKEN (required if using hipchat)
 
@@ -97,6 +100,7 @@ group used to start resque processes
 set this to the fully qualified path where you installed reaktor (temporary until code is modified to auto-discover base dir)
 
 ## Host and Port Configuration (for thin server)
+
 Host and Port configuration is handled in the [reaktor/reaktor-cfg.yml](https://github.com/pzim/reaktor/blob/master/reaktor-cfg.yml) file:
 
 - The 'address' key is where you configure the hostname
