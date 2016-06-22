@@ -16,6 +16,10 @@ if RUBY_VERSION.to_f < 2.0
   gem 'net-ssh', '2.9.1'
 end
 
+if RUBY_VERSION.to_f >= 2.2
+  gem 'guard-rake', '1.0.0'
+end
+
 ## gems for hipchat-api
 gem 'hipchat-api', '1.0.6'
 gem 'capistrano', '2.15.5'
@@ -24,7 +28,6 @@ group :test do
   gem 'rspec', '3.0.0'
   gem 'rack-test', '0.6.2'
   gem 'jsonlint'
-  gem 'guard-rake'
   gem 'codeclimate-test-reporter', require: false
   gem 'coveralls', require: false
 end
