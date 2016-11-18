@@ -1,4 +1,5 @@
 require 'faraday'
+require 'json'
 require 'logger'
 
 module Notifiers
@@ -12,24 +13,35 @@ module Notifiers
       @notification = nil
       @logger ||= Logger.new(STDOUT, Logger::INFO)
       env          = ENV.to_hash
-      @mattermost_url  = env['REAKTOR_MATTERMOST_URL']
-      @logger.info("token = #{token}")
+#      @mattermost_url  = env['REAKTOR_MATTERMOST_URL']
+      @mattermost_url  = 'https://mattermost.hetzner.co.za/hooks/ksr4ipctwp81fkybigcmixmi1c'
     end
 
     def update(message)
       @logger.info("#{self}: #{message}")
       @notification = message
-      send_message
+      send_message(message)
     end
 
     private
 
-    def send_message
-      params = {payload={"username" : "Reaktor",
-                         "text": @notification
-                        }
-               }
-      Faraday.post(@mattermost_url, params)
+    def send_message(message)
+      params = {'username' => 'Reaktor',
+                'text' => message
+               }.to_json
+      params = {'username' => 'Reaktor',
+                              'text' => message
+               }.to_json
+      conn = Faraday.new do | faraday |
+        faraday.request  :url_encoded             # form-encode POST params
+        faraday.response :logger                  # log requests to STDOUT
+        faraday.adapter  Faraday.default_adapter  # make requests with Net::HTTP
+      end
+      conn.post do | req |
+        req.url @mattermost_url
+        req.headers['Content-Type'] = 'application/json'
+        req.body = params
+      end
     end
 
   end
