@@ -26,15 +26,12 @@ module Notifiers
     private
 
     def send_message(message)
-      params = {'username' => 'Reaktor',
-                'text' => message
-               }.to_json
+      message.gsub!('<br>','')
       params = {'username' => 'Reaktor',
                               'text' => message
                }.to_json
       conn = Faraday.new do | faraday |
         faraday.request  :url_encoded             # form-encode POST params
-        faraday.response :logger                  # log requests to STDOUT
         faraday.adapter  Faraday.default_adapter  # make requests with Net::HTTP
       end
       conn.post do | req |
