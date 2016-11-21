@@ -13,8 +13,7 @@ module Notifiers
       @notification = nil
       @logger ||= Logger.new(STDOUT, Logger::INFO)
       env          = ENV.to_hash
-#      @mattermost_url  = env['REAKTOR_MATTERMOST_URL']
-      @mattermost_url  = 'https://mattermost.hetzner.co.za/hooks/ksr4ipctwp81fkybigcmixmi1c'
+      @mattermost_url  = env['REAKTOR_MATTERMOST_URL']
     end
 
     def update(message)
