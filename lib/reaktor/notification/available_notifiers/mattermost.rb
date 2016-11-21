@@ -12,8 +12,8 @@ module Notifiers
     def initialize
       @notification = nil
       @logger ||= Logger.new(STDOUT, Logger::INFO)
-      env          = ENV.to_hash
-      @mattermost_url  = env['REAKTOR_MATTERMOST_URL']
+      env = ENV.to_hash
+      @mattermost_url = env['REAKTOR_MATTERMOST_URL']
     end
 
     def update(message)
