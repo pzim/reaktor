@@ -18,8 +18,13 @@ module GitAction
       @puppetfile.write_new_puppetfile(pfile_contents)
       @puppetfile_dir.push(self.branch_name, @puppetfile.git_update_ref_msg)
       Notification::Notifier.instance.notification = "r10k deploy module for #{module_name} in progress..."
-      r10k_deploy_module self.module_name
-      Notification::Notifier.instance.notification = "r10k deploy module for #{module_name} finished"
+      begin
+        r10k_deploy_module self.module_name
+      rescue => e
+        Notification::Notifier.instance.notification = "ABORTING r10k deploy due to: #{e.message}"
+      else
+        Notification::Notifier.instance.notification = "r10k deploy module for #{module_name} finished"
+      end
     end
     def cleanup
       @puppetfile_dir.destroy_workdir

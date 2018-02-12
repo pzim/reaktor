@@ -1,4 +1,5 @@
 require 'commandrunner'
+require 'net/ping'
 
 module Reaktor
 module R10K
@@ -18,11 +19,29 @@ module R10K
     end
 
     def deploy(cap_command)
+      unless puppetservers_available.empty?
+        raise "Not all Puppetservers are available: #{puppetservers_available.join','}"
+      end
       @cap_command = cap_command
-      #cmd_runner = Reaktor::CommandRunner.new()
       result = execute_cap(@cap_command)
     end
                       
+    def puppetservers_available
+      unavailable_servers = []
+      puppetservers = get_puppetservers
+      puppetservers.each do | puppetserver |
+        check = Net::Ping::External.new(puppetserver.chomp).ping?
+        unavailable_servers << puppetserver.chomp unless check
+      end
+      unavailable_servers
+    end
+
+    def get_puppetservers
+      m_file = ENV['REAKTOR_PUPPET_MASTERS_FILE']
+      mastersFile = open(m_file)
+      mastersFile.readlines
+    end
+
   end
 end
 end
