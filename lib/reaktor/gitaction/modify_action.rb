@@ -21,9 +21,9 @@ module GitAction
       begin
         r10k_deploy_module self.module_name
       rescue => e
-        Notification::Notifier.instance.notification = ":circle_red: ABORTING r10k deploy for environment `#{self.branch_name}` (`#{module_name}`) due to: #{e.message}"
+        Notification::Notifier.instance.notification = ":sad_face_cowboy: ABORTING r10k deploy for environment `#{self.branch_name}` (`#{module_name}`) due to: #{e.message}"
       else
-        Notification::Notifier.instance.notification = ":circle_green: Environment `#{self.branch_name}` (`#{module_name}`) finished"
+        Notification::Notifier.instance.notification = ":success: Environment `#{self.branch_name}` (`#{module_name}`) finished"
       end
     end
     def cleanup
