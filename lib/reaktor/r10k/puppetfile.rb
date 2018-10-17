@@ -28,8 +28,8 @@ module Reaktor
       # @param repo_name - The repo name assiociated with the module
       def get_module_name(repo_name)
         pfile = loadFile
-        regex = /mod ["']\w*-(\w*)["'],\s*$\n^(\s*):git\s*=>\s*["'].*#{repo_name}(\.git)?["'],+(\s*)(:branch|:tag|:ref)\s*=>\s*['"](\w+|\w+\.\d+\.\d+)['"]$/
-          new_contents = pfile.match(regex)
+        regex = /mod ["'](\w*(-\w*)?)["'],\s*$\n^(\s*):git\s*=>\s*["'].*#{repo_name}(\.git)?["'],+(\s*)(:branch|:tag|:ref)\s*=>\s*['"](\w+|\w+\.\d+\.\d+)['"]$/
+        new_contents = pfile.match(regex)
         if new_contents
           module_name = new_contents[1]
         else
