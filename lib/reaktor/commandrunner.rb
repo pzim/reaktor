@@ -8,29 +8,35 @@ module Reaktor
 
     # read each line from stream and html format the newlines, then send notification 
     def read_stream(label, stream)
+      is_stdout = label.eql? 'STDOUT'
+
       @stdout_msg = ""
       @stderr_msg = ""
       begin
         while line = stream.gets
-          if label.eql? 'STDOUT'
+          if is_stdout
             @stdout_msg << "#{line}<br>"
           else
             @stderr_msg << "#{line}<br>"
           end
         end
       rescue Exception
-        if label.eql? 'STDOUT'
+        if is_stdout
           @stdout_msg << "Something went wrong with command: #{$!}"
         else
           @stderr_msg << "Something went wrong with command: #{$!}"
         end
       end
-      @logger.debug("######### STDOUT Message size = #{@stdout_msg.length}")
-      @logger.debug("######### STDERR Message size = #{@stderr_msg.length}")
-      unless @stdout_msg.length < 1
+      @logger.debug("######### STDOUT: #{@stdout_msg}") if is_stdout
+      @logger.debug("######### STDERR: #{@stderr_msg}") unless is_stdout
+
+      @stdout_msg.strip!
+      @stderr_msg.strip!
+
+      if @stdout_msg.length > 0 and is_stdout
         Notification::Notifier.instance.notification = @stdout_msg
       end
-      unless @stderr_msg.length <1
+      if @stderr_msg.length > 0 and not is_stdout
         Notification::Notifier.instance.notification = @stderr_msg
       end
     end
