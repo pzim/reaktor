@@ -25,8 +25,8 @@ module Reaktor
           @stderr_msg << "Something went wrong with command: #{$!}"
         end
       end
-      @logger.debug("######### STDOUT Message size = #{@stdout_msg.length}")
-      @logger.debug("######### STDERR Message size = #{@stderr_msg.length}")
+      @logger.debug("######### STDOUT: #{@stdout_msg}")
+      @logger.debug("######### STDERR: #{@stderr_msg}")
       unless @stdout_msg.length < 1
         Notification::Notifier.instance.notification = @stdout_msg
       end
