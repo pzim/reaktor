@@ -15,6 +15,8 @@ gem 'net-ping'
 # Pin versions for old ruby
 if RUBY_VERSION.to_f < 2.0
   gem 'net-ssh', '2.9.1'
+else
+  gem 'net-ssh', '4.2.0'
 end
 
 ## gems for hipchat-api
