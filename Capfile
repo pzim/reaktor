@@ -9,17 +9,21 @@ role(:puppet_master) {getPuppetMasters}
 desc "for specified branch in puppetfile repo, use r10k to deploy all modules for the specified environment."
 
 lock_file = "/var/tmp/r10k.lock"
-date = `date`.chomp
-if File.exists?(lock_file)
-  puts "Aborting, r10k deploy already in progress"
-  exit 1
+
+task 'setup_lock' do
+	date = `date`.chomp
+	if File.exists?(lock_file)
+		puts "Aborting, r10k deploy already in progress"
+		exit 1
+	end
+
+	puts "Creating lock file to avoid duplicate runs"
+	File.open(lock_file, 'w') { |file| file.write("#{date} - r10k locked for branch deploy") }
 end
 
-puts "Creating lock file to avoid duplicate runs"
-File.open(lock_file, 'w') { |file| file.write("#{date} - r10k locked for branch deploy") }
-
-task "update_environment", :roles => :puppet_master do
+task "update_environment", :roles => :puppet_master, :on_error => :remove_lock do
   if exists?(:branchname)
+	  puts "Branch name to be deployed '#{branchname}'"
     #run "r10k -v debug deploy environment #{branchname} -p"
     run "r10k deploy environment #{branchname} -p"
   else
@@ -37,5 +41,10 @@ task "deploy_module", :roles => :puppet_master do
   end
 end
 
-puts "Cleaning up lockfile"
-File.delete(lock_file) if File.exists?(lock_file)
+task 'remove_lock' do
+	puts "Cleaning up lockfile"
+	File.delete(lock_file) if File.exists?(lock_file)
+end
+
+before 'update_environment', 'setup_lock'
+after 'update_environment', 'remove_lock'
