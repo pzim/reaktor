@@ -25,7 +25,7 @@ module R10K
       @cap_command = cap_command
       result = execute_cap(@cap_command)
     end
-                      
+
     def puppetservers_available
       unavailable_servers = []
       puppetservers = get_puppetservers
