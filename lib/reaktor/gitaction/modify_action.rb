@@ -22,6 +22,7 @@ module GitAction
         r10k_deploy_module self.module_name
       rescue => e
         Notification::Notifier.instance.notification = ":sad_face_cowboy: ABORTING r10k deploy for environment `#{self.branch_name}` (`#{module_name}`) due to: #{e.message}"
+#        Notification::Notifier.instance(@mattermost_url = env['SLACK_KNL_SHIELD_URL']).notification = ":sad_face_cowboy: ABORTING r10k deploy for environment `#{self.branch_name}` (`#{module_name}`) due to: #{e.message}"
       else
         Notification::Notifier.instance.notification = ":success: Environment `#{self.branch_name}` (`#{module_name}`) finished"
       end
