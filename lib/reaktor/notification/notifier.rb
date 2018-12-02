@@ -15,13 +15,13 @@ module Notification
       @logger.info("NOTIFICATION initialised")
     end
 
-    def self.send_message(message,room='default')
+    def send_message(message,room='default')
       @logger.info("NOTIFIER room: #{room}")
       webhook_uri = @config['notifiers'][room]
       @logger.info("NOTIFIER webhook_uri #{webhook_uri}")
       @logger.info("NOTIFIER delivering message via slack")
       notifier = Slack::Notifier.new(webhook_uri)
-      notifier.ping message
+      notifier.ping message.chomp
     end
 
   end
