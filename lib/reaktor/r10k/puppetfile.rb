@@ -35,7 +35,9 @@ module Reaktor
           module_name = new_contents[1]
         else
           logger.error("UNABLE TO FIND MODULE NAME FOR REPO IN PUPPETFILE - CHECK SYNTAX(eg. hetzner-modsecurity) - Repository: #{repo_name}")
-          Notification::Notifier.instance.notification = ":poopfire: UNABLE TO FIND MODULE NAME FOR REPO IN PUPPETFILE - CHECK SYNTAX - Repository: #{repo_name}"
+          #send alert to default room and ALSO escalate to less noisy room
+          Notification::Notifier.instance.send_message(":poopfire: UNABLE TO FIND MODULE NAME FOR REPO IN PUPPETFILE - CHECK SYNTAX - Repository: #{repo_name}")
+          Notification::Notifier.instance.send_message(":poopfire: UNABLE TO FIND MODULE NAME FOR REPO IN PUPPETFILE - CHECK SYNTAX - Repository: #{repo_name}",'kernels_shield')
           exit 5
         end
         module_name
