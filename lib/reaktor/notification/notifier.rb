@@ -12,14 +12,11 @@ module Notification
     def initialize
       @config = YAML.load_file(('config/notifiers.yml'))
       @logger ||= Logger.new(STDOUT, Logger::INFO)
-      @logger.info("NOTIFICATION initialised")
     end
 
     def send_message(message,room='default')
-      @logger.info("NOTIFIER room: #{room}")
       webhook_uri = @config['notifiers'][room]
-      @logger.info("NOTIFIER webhook_uri #{webhook_uri}")
-      @logger.info("NOTIFIER delivering message via slack")
+      @logger.info("NOTIFIER delivering slack message to room: #{room}")
       notifier = Slack::Notifier.new(webhook_uri)
       notifier.ping message.chomp
     end
