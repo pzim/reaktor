@@ -17,10 +17,10 @@ module GitAction
       @puppetfile.write_new_puppetfile(pfile_contents)
       pushed = @puppetfile_dir.push(self.branch_name, @puppetfile.git_update_ref_msg)
       if pushed
-        Notification::Notifier.instance.notification = "r10k deploy environment for #{branch_name} in progress..."
+        Notification::Notifier.instance.send_message("r10k deploy environment for #{branch_name} in progress...")
         result = r10k_deploy_env self.branch_name
         if result.exited?
-          Notification::Notifier.instance.notification = "r10k deploy environment for #{branch_name} finished"
+          Notification::Notifier.instance.send_message("r10k deploy environment for #{branch_name} finished")
         end
       end
     end
