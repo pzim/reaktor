@@ -16,7 +16,10 @@ module Notification
 
     def send_message(message,room='default')
       webhook_uri = @config['notifiers'][room]
-      @logger.info("NOTIFIER delivering slack message to room: #{room}")
+      if webhook_uri.nil
+        @logger.error("Webhook_uri not found.")
+        raise "Webhook_uri not found."
+      end
       notifier = Slack::Notifier.new(webhook_uri)
       notifier.ping message.chomp
     end
