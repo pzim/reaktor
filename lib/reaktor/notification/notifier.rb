@@ -16,7 +16,7 @@ module Notification
 
     def send_message(message,room='default')
       webhook_uri = @config['notifiers'][room]
-      if webhook_uri.nil
+      if webhook_uri.nil?
         @logger.error("Webhook_uri not found for room #{room}.")
         raise "Webhook_uri not found for room #{room}."
       end
