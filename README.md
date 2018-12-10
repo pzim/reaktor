@@ -16,7 +16,7 @@ Reaktor is a modular post-receive hook designed to work with [r10k](https://gith
 
 Reaktor uses r10k to deploy your changes to all of your puppet masters and notifies you when it's finished so you know when your environment is ready.
 
-Reaktor not only supports [puppet dynamic environments (via r10k)](http://puppetlabs.com/blog/git-workflow-and-puppet-environments), but also allows for Puppetfile dynamic branch creation. It provides notifications to [hipchat](http://hipchat.com) by default, but notifications are pluggable to work with other chat providers/notification types, e.g., [campfire](https://campfirenow.com/) and [slack](https://slack.com/). The default configuration supports [git webhook](https://developer.github.com/webhooks/) payloads from GitHub and GitHub Enterprise. In addition, reaktor supports the following git sources:  
+Reaktor not only supports [puppet dynamic environments (via r10k)](http://puppetlabs.com/blog/git-workflow-and-puppet-environments), but also allows for Puppetfile dynamic branch creation. It provides notifications to [slack](http://slack.com) by default. The default configuration supports [git webhook](https://developer.github.com/webhooks/) payloads from GitHub and GitHub Enterprise. In addition, reaktor supports the following git sources:  
  	- [Stash](https://www.atlassian.com/software/stash)  
  	- [Gitlab](https://about.gitlab.com/)
 
@@ -68,22 +68,6 @@ puppet-master-02
 
 export PUPPETFILE_GIT_URL="git@github.com:_org_/puppetfile.git"
 
-##### REAKTOR_HIPCHAT_TOKEN (required if using hipchat)
-
-auth token to enable posting hipchat messages. this cannot be a 'notification' token, as reaktor needs to be able to get a room list.
-
-##### REAKTOR_HIPCHAT_ROOM (required if using hipchat)
-
-name of hipchat room to send reaktor/r10k output notifications
-
-##### REAKTOR_HIPCHAT_FROM (required if using hipchat)
-
-user to send hipchat notifications as
-
-##### REAKTOR_HIPCHAT_URL (required if using hipchat local server)
-
-full url of server v1 api. ie: 'https://hipchat.foo.bar/v1'
-
 ##### RESQUE_WORKER_USER (defaults to 'jenkins')
 
 user used to start resque processes
@@ -124,18 +108,6 @@ This is the url you would configure in the GitHub ServiceHooks Webhook URL for e
 The reaktor/reaktor-cfg.yml has additional items that you can configure, including pidfile and log.
 
 
-## Pluggable Notifications
-The default IM tool for receiving reaktor notifications is [hipchat](http://hipchat.com). By setting the appropriate HIPCHAT-related environment variables above, you will receive hipchat notifications automatically.
-
-If you use a different IM tool, such as campfire or slack, you will need to implement the notifier accordingly. This is fairly straightforward. There are 2 directories under reaktor/lib/reaktor/notification:
-
-- active_notifiers (holds currently active notifiers)
-- available_notifiers (holds potential notifiers, but these aren't live)
-
-In order to implement a custom notifier do the following:
-
-- create the .rb file for your notifier and place it under the active_notifiers dir
-- use the hipchat.rb as a reference, replacing 'class Hipchat' with an appropriate name, such as 'class Slack' (there is a dummy slack.rb file in available_notifiers as well)
-- the new .rb file must implement the **_update_** method (again, use hipchat.rb as a reference)
-- remove hipchat.rb from the active_notifiers dir
-- restart the post-receive hook (rake stop; rake start)
+## Notifications
+Reaktor now only supports notifications to slack via webhook.
+More than one active room can be used by configuring the required slack channels in the config/notifiers.yml file and then referencing this channel key with the message call.  
