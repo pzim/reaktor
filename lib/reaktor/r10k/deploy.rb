@@ -19,9 +19,10 @@ module R10K
     end
 
     def deploy(cap_command)
-      unless puppetservers_available.empty?
-        logger.error("FAIL! Not all puppetservers are available: #{puppetservers_available.join','}")
-        raise "Not all Puppetservers are available: #{puppetservers_available.join','}"
+      servers_available = puppetservers_available
+      unless servers_available.empty?
+        logger.error("FAIL! Not all puppetservers are available: #{servers_available.join','}")
+        raise "Not all Puppetservers are available: #{servers_available.join','}"
       end
       @cap_command = cap_command
       result = execute_cap(@cap_command)
