@@ -47,6 +47,8 @@ module Reaktor
       begin
         while line = stream.gets
           @logger.debug("line: #{line}")
+          line.gsub!('** [out ::','')
+          line.gsub!('net]','net -')
           if action.eql? "update_environment"
             if line.include? "WARN" or line.include? "Sync" or line.include? "failed" or line.include? "finished"
               @msg << "#{line}"
