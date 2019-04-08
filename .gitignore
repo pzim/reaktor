@@ -4,3 +4,5 @@ coverage/
 .bundle
 *.log
 dump.rdb
+reaktor-cfg.yml
+config/notifiers.yml
