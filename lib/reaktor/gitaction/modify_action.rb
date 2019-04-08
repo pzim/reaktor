@@ -19,13 +19,15 @@ module GitAction
       @puppetfile_dir.push(self.branch_name, @puppetfile.git_update_ref_msg)
       Notification::Notifier.instance.send_message("Environment `#{self.branch_name}` (`#{module_name}`) triggered an r10k deploy")
       begin
-        r10k_deploy_module self.module_name
+        # r10k_deploy_module self.module_name
+        Notification::Notifier.instance.send_message("Deploying environment #{self.branch_name}")
+        r10k_deploy_env self.branch_name
       rescue => e
         #Send failure alert to default room and ALSO to escalation room that is less noisy
         Notification::Notifier.instance.send_message(":sad_face_cowboy: ABORTING r10k deploy for environment `#{self.branch_name}` (`#{module_name}`) due to: #{e.message}")
         Notification::Notifier.instance.send_message(":sad_face_cowboy: ABORTING r10k deploy for environment `#{self.branch_name}` (`#{module_name}`) due to: #{e.message}", 'kernels_shield')
       else
-        Notification::Notifier.instance.send_message(":success: Environment `#{self.branch_name}` (`#{module_name}`) finished")
+        Notification::Notifier.instance.send_message(":success: Environment `#{self.branch_name}` finished")
       end
     end
     def cleanup

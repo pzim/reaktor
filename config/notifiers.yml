@@ -1,3 +1,3 @@
 notifiers:
-  default: "https://hooks.slack.com/services/SOMECHANNEL"
-  other_channel: "https://hooks.slack.com/services/SOMEOTHERCHANNEL"
+  default: https://hooks.slack.com/services/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
+  kernels_shield: https://hooks.slack.com/services/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
