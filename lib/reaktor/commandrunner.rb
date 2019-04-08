@@ -33,12 +33,12 @@ module Reaktor
       @stdout_msg.strip!
       @stderr_msg.strip!
 
-      if @stdout_msg.length > 0 and is_stdout
-        Notification::Notifier.instance.send_message(@stdout_msg)
-      end
-      if @stderr_msg.length > 0 and not is_stdout
-        Notification::Notifier.instance.send_message(@stderr_msg)
-      end
+      #if @stdout_msg.length > 0 and is_stdout
+      #  Notification::Notifier.instance.send_message("stdout: #{@stdout_msg}")
+      #end
+      #if @stderr_msg.length > 0 and not is_stdout
+      #  Notification::Notifier.instance.send_message("stderr #{@stderr_msg}")
+      #end
     end
 
     # read each line from capistrano stream and html format the newlines, then send notification 
@@ -47,8 +47,8 @@ module Reaktor
       begin
         while line = stream.gets
           @logger.debug("line: #{line}")
-          line.gsub!('** [out ::','')
-          line.gsub!('net]','net -')
+          line.gsub!('** [out ::','*')
+          line.gsub!('net]','net* -')
           if action.eql? "update_environment"
             if line.include? "WARN" or line.include? "Sync" or line.include? "failed" or line.include? "finished"
               @msg << "#{line}"
@@ -63,7 +63,7 @@ module Reaktor
         @msg << "Something went wrong with cap #{action}: #{$!}"
       end
 
-      Notification::Notifier.instance.send_message(@msg)
+      Notification::Notifier.instance.send_message("*Deploying to servers:*\n#{@msg} *Finished deploying to servers*")
     end
 
     # takes an array consisting of main command and options 
