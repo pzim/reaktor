@@ -1,3 +1,6 @@
 fission.iws
 .idea
 coverage/
+.bundle
+*.log
+dump.rdb
