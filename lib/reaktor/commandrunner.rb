@@ -8,31 +8,37 @@ module Reaktor
 
     # read each line from stream and html format the newlines, then send notification 
     def read_stream(label, stream)
+      is_stdout = label.eql? 'STDOUT'
+
       @stdout_msg = ""
       @stderr_msg = ""
       begin
         while line = stream.gets
-          if label.eql? 'STDOUT'
-            @stdout_msg << "#{line}<br>"
+          if is_stdout
+            @stdout_msg << "#{line}"
           else
-            @stderr_msg << "#{line}<br>"
+            @stderr_msg << "#{line}"
           end
         end
       rescue Exception
-        if label.eql? 'STDOUT'
+        if is_stdout
           @stdout_msg << "Something went wrong with command: #{$!}"
         else
           @stderr_msg << "Something went wrong with command: #{$!}"
         end
       end
-      @logger.debug("######### STDOUT Message size = #{@stdout_msg.length}")
-      @logger.debug("######### STDERR Message size = #{@stderr_msg.length}")
-      unless @stdout_msg.length < 1
-        Notification::Notifier.instance.notification = @stdout_msg
-      end
-      unless @stderr_msg.length <1
-        Notification::Notifier.instance.notification = @stderr_msg
-      end
+      @logger.debug("######### STDOUT: #{@stdout_msg}") if is_stdout
+      @logger.debug("######### STDERR: #{@stderr_msg}") unless is_stdout
+
+      @stdout_msg.strip!
+      @stderr_msg.strip!
+
+      #if @stdout_msg.length > 0 and is_stdout
+      #  Notification::Notifier.instance.send_message("stdout: #{@stdout_msg}")
+      #end
+      #if @stderr_msg.length > 0 and not is_stdout
+      #  Notification::Notifier.instance.send_message("stderr #{@stderr_msg}")
+      #end
     end
 
     # read each line from capistrano stream and html format the newlines, then send notification 
@@ -41,13 +47,15 @@ module Reaktor
       begin
         while line = stream.gets
           @logger.debug("line: #{line}")
+          line.gsub!('** [out ::','*')
+          line.gsub!('net]','net* -')
           if action.eql? "update_environment"
             if line.include? "WARN" or line.include? "Sync" or line.include? "failed" or line.include? "finished"
-              @msg << "#{line}<br>"
+              @msg << "#{line}"
             end
           else #action = deploy_module
             if line.include? "Sync" or line.include? "failed" or line.include? "finished"
-              @msg << "#{line}<br>"
+              @msg << "#{line}"
             end
           end
         end
@@ -55,7 +63,7 @@ module Reaktor
         @msg << "Something went wrong with cap #{action}: #{$!}"
       end
 
-      Notification::Notifier.instance.notification = @msg
+      Notification::Notifier.instance.send_message("*Deploying to servers:*\n#{@msg} *Finished deploying to servers*")
     end
 
     # takes an array consisting of main command and options 

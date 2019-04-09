@@ -12,7 +12,7 @@ module GitAction
       @puppetfile_dir.clone
     end
     def deletePuppetfileBranch
-      Notification::Notifier.instance.notification = "Deleting #{branch_name} from puppetfile repo"
+      Notification::Notifier.instance.send_message("Deleting #{branch_name} from puppetfile repo")
       @puppetfile_dir.deleteBranch(self.branch_name)
     end
     def cleanup

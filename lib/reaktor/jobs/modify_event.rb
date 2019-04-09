@@ -3,7 +3,7 @@ module Reaktor
     class ModifyEvent
       include Event
 
-      @queue = :resque_modify
+      @queue = :resque_create
       @logger ||= Logger.new(STDOUT, Logger::INFO)
 
       def self.perform(module_name, branch_name)

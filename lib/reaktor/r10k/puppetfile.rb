@@ -1,4 +1,5 @@
 #require 'commandrunner'
+require 'notification/notifier'
 
 module Reaktor
   module R10K
@@ -28,12 +29,16 @@ module Reaktor
       # @param repo_name - The repo name assiociated with the module
       def get_module_name(repo_name)
         pfile = loadFile
-        regex = /mod ["'](\w*)["'],\s*$\n^(\s*):git\s*=>\s*["'].*#{repo_name}.git["'],+(\s*):ref\s*=>\s*['"](\w+|\w+\.\d+\.\d+)['"]$/
-          new_contents = pfile.match(regex)
+        regex = /mod ["'](?:\w*-)*(\w*)["'],\s*$\n^(\s*):git\s*=>\s*["'].*#{repo_name}(\.git)?["'],+(\s*)(:branch|:tag|:ref)\s*=>\s*['"](\w+|\w+\.\d+\.\d+)['"]$/
+        new_contents = pfile.match(regex)
         if new_contents
           module_name = new_contents[1]
         else
-          logger.info("ERROR - VERIFY YOU PUPPETFILE SYNTAX - Repository: #{repo_name} - Git url: #{@git_url}")
+          logger.error("UNABLE TO FIND MODULE NAME FOR REPO IN PUPPETFILE - CHECK SYNTAX(eg. hetzner-modsecurity) - Repository: #{repo_name}")
+          #send alert to default room and ALSO escalate to less noisy room
+          Notification::Notifier.instance.send_message(":poopfire: UNABLE TO FIND MODULE NAME FOR REPO IN PUPPETFILE - CHECK SYNTAX - Repository: #{repo_name}")
+          Notification::Notifier.instance.send_message(":poopfire: UNABLE TO FIND MODULE NAME FOR REPO IN PUPPETFILE - CHECK SYNTAX - Repository: #{repo_name}",'kernels_shield')
+          exit 5
         end
         module_name
       end
@@ -45,7 +50,7 @@ module Reaktor
       # @param branchname - The ref to change for the module
       def update_module_ref(module_name, branchname)
         pfile = loadFile
-        regex = /(#{module_name}(\.git)+['"],)+(\s*):ref\s*=>\s*['"](\w+|\w+\.\d+\.\d+)['"]/m
+        regex = /(#{module_name}(\.git)?+['"],)+(\s*)(:branch|:tag|:ref)\s*=>\s*['"](\w+|\w+\.\d+\.\d+)['"]/m
         pfile.gsub!(regex, """\\1\\3:ref => '#{branchname}'""".strip)
       end
 
