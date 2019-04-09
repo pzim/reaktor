@@ -17,7 +17,8 @@ module GitAction
       pfile_contents = @puppetfile.update_module_ref(self.module_name, self.branch_name)
       @puppetfile.write_new_puppetfile(pfile_contents)
       @puppetfile_dir.push(self.branch_name, @puppetfile.git_update_ref_msg)
-      Notification::Notifier.instance.send_message("Environment `#{self.branch_name}` (`#{module_name}`) triggered an r10k deploy")
+      line = ":heavy_minus_sign:"*20
+      Notification::Notifier.instance.send_message("#{line}\nEnvironment `#{self.branch_name}` (`#{module_name}`) triggered an environment deploy")
       begin
         # r10k_deploy_module self.module_name
         Notification::Notifier.instance.send_message("Deploying environment #{self.branch_name}")
@@ -27,7 +28,7 @@ module GitAction
         Notification::Notifier.instance.send_message(":sad_face_cowboy: ABORTING r10k deploy for environment `#{self.branch_name}` (`#{module_name}`) due to: #{e.message}")
         Notification::Notifier.instance.send_message(":sad_face_cowboy: ABORTING r10k deploy for environment `#{self.branch_name}` (`#{module_name}`) due to: #{e.message}", 'kernels_shield')
       else
-        Notification::Notifier.instance.send_message(":success: Environment `#{self.branch_name}` finished")
+        Notification::Notifier.instance.send_message(":success: Environment `#{self.branch_name}` finished\n#{line}")
       end
     end
     def cleanup
@@ -36,6 +37,3 @@ module GitAction
   end
 end
 end
-   
-
-
